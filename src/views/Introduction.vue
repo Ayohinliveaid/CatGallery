@@ -172,7 +172,7 @@ body {
 }
 .content {
   position: relative;
-  min-width: 1100px;
+  min-width: 1000px;
 }
 
 .header {
@@ -219,8 +219,9 @@ body {
 }
 
 .sec0 {
-  height: 100vw;
+  height: 60vw;
   max-height: 500px;
+  min-height: 300px;
   display: flex;
 }
 .sec0 * {
@@ -229,13 +230,12 @@ body {
 
 .sec0 img {
   height: 100%;
-  min-height: 300px;
+  min-height: 100px;
   max-height: 500px;
-  /* width: 100px; */
 }
 
 .sec0div {
-  flex: 2;
+  /* flex: 2; */
   height: 100%;
   display: flex;
   /* Add this to make it a flex container */
