@@ -172,7 +172,7 @@ body {
 }
 .content {
   position: relative;
-  min-width: 1000px;
+  min-width: 1100px;
 }
 
 .header {
@@ -295,6 +295,7 @@ h2 {
 .sec1div div {
   height: 500px;
   width: 20vw;
+  min-width: 180px;
   background-color: antiquewhite;
   margin: 10px;
   border-radius: 10px;
@@ -313,7 +314,7 @@ h2 {
   height: 500px;
   margin-top: 70px;
 }
-.sec2 .sec2div {
+v .sec2 .sec2div {
   display: flex;
   justify-content: center;
   align-items: center;
