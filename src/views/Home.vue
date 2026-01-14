@@ -102,8 +102,8 @@
                       >Login</el-button
                     >
                   </el-form-item>
-                  (Test login function with any input)
                 </el-form>
+                <p style="margin-top: 70px">(Test login function with any input)</p>
               </el-tab-pane>
               <el-tab-pane label="Sign Up">
                 <el-form
@@ -327,7 +327,7 @@ export default {
 
 .window {
   background-color: antiquewhite;
-  height: 40vh;
+  height: 50vh;
   width: 60vh;
   position: fixed;
   /* positon:absolute;why absolute make the div non-visible? not compatible with element plus*/
@@ -336,11 +336,8 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.el-tab-pane {
+#mainPane.el-tab-pane {
   overflow: auto;
-}
-
-#mainPane {
   position: relative;
 }
 
@@ -351,6 +348,7 @@ export default {
   margin-bottom: 10px;
   position: sticky;
   left: 0;
+  margin-bottom: auto;
   /* position:absolute;
     right:10px; */
 }
