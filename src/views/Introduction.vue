@@ -12,7 +12,10 @@
       <router-link to="/home" class="routerLink">Experience now</router-link>
     </header>
     <div id="sec0" class="sec0">
-      <img src="/public/CatFace.png" alt="CatFace" />
+      <div style="overflow: hidden">
+        <img src="/public/CatFace.png" alt="CatFace" />
+      </div>
+
       <div class="sec0div">
         <h1>Welcome to the Electric Cat Gallery</h1>
         <p>

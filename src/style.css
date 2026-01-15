@@ -2,6 +2,15 @@ body {
   margin: 0;
 }
 
+img {
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+img:hover {
+  transform: scale(1.03);
+}
+
 
 /* costom element-plus style */
 .el-container {
@@ -13,15 +22,13 @@ body {
   background-color: antiquewhite;
   text-align: center;
   line-height: 50px;
-  font-size:24px;
+  font-size: 24px;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.691);;
+  color: rgba(0, 0, 0, 0.691);
 }
 
-
 .el-main {
-  background-color: rgb(252, 246, 240);;
-  
+  background-color: rgb(252, 246, 240);
 }
 
 .el-tabs .el-tabs__item {
@@ -29,30 +36,25 @@ body {
   color: rgba(82, 56, 23, 0.691);
   font-size: larger;
   font-weight: bold;
-  
 }
 
 .el-tabs .el-tabs__item.is-active {
-  background-color:  rgb(232, 209, 179); /* Active background color */
+  background-color: rgb(232, 209, 179); /* Active background color */
   color: rgba(0, 0, 0, 0.691); /* Active text color */
   font-size: larger; /* Active font size */
- 
 }
 
 .el-tabs .el-tabs__active-bar {
-  background-color: rgba(0, 0, 0, 0.691); 
-
+  background-color: rgba(0, 0, 0, 0.691);
 }
 
 .el-tabs .el-tabs__item:hover {
   color: rgba(0, 0, 0, 0.691); /* Change this color to your desired hover color */
 }
 
-.el-input .el-input__wrapper{
+.el-input .el-input__wrapper {
   background-color: rgb(253, 249, 244);
-  border:none;
-
-  
+  border: none;
 }
 
 .routerLink {

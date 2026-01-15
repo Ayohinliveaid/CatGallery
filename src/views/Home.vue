@@ -348,7 +348,7 @@ export default {
   margin-bottom: 10px;
   position: sticky;
   left: 0;
-  margin-bottom: auto;
+
   /* position:absolute;
     right:10px; */
 }
@@ -366,7 +366,7 @@ export default {
 }
 
 .el-card.cardStyle {
-  background-color: rgb(173, 247, 173);
+  background-color: white;
   border: none;
   margin-left: 10px;
   /* box-shadow: 3px 3px 100px 100px rgb(173, 247, 173); */
