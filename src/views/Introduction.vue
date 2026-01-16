@@ -13,7 +13,7 @@
     </header>
     <div id="sec0" class="sec0">
       <div style="overflow: hidden">
-        <img src="/public/CatFace.png" alt="CatFace" />
+        <img src="/CatFace.png" alt="CatFace" />
       </div>
 
       <div class="sec0div">
