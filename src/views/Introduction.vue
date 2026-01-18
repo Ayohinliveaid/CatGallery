@@ -12,7 +12,7 @@
       <router-link to="/home" class="routerLink">Experience now</router-link>
     </header>
     <div id="sec0" class="sec0">
-      <div style="overflow: hidden">
+      <div style="overflow: hidden; border-radius: 20px">
         <img src="/CatFace.png" alt="CatFace" />
       </div>
 
@@ -168,7 +168,6 @@ export default {
 
 <style>
 body {
-  background-color: rgb(252, 246, 240);
   width: 100vw;
   height: 100vh;
   overflow: auto;
@@ -176,38 +175,42 @@ body {
 .content {
   position: relative;
   min-width: 1000px;
+  background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 30%);
 }
 
 .header {
-  background-color: antiquewhite;
+  background-color: rgba(250, 235, 215, 0.3);
   display: flex;
   align-items: center;
   width: 100%;
   position: sticky;
   top: 0;
-  /* overflow: auto; */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 5px 0px grey;
+  z-index: 1;
 }
 
 .header ul {
   display: flex;
   margin-left: 100px;
   margin-top: 0;
-  /* margin-right: 50px; */
-  padding-bottom: 0;
-  padding-left: 10px;
+  padding-left: 0px;
   margin-bottom: 0;
+  gap: 100px;
 }
 
 .header ul li {
-  margin-right: 100px;
   list-style-type: none;
-  height: 70px;
-  /* display:flex;
-    align-items: center; */
+  height: 60px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 1px 10px 0px grey;
+  padding: 0 10px;
 }
 
 .header ul li:hover {
-  background-color: black;
+  background-color: rgba(213, 173, 120, 0.3);
 }
 
 .header ul li a {
@@ -215,9 +218,7 @@ body {
   text-decoration: none;
   font-size: large;
   font-weight: bold;
-  background-color: antiquewhite;
-  padding-top: 25px;
-  padding-bottom: 22px;
+
   color: black;
 }
 
