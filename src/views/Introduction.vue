@@ -2,14 +2,13 @@
   <div class="content">
     <header class="header">
       <!-- <img src=""  alt="LOGO"/> -->
-      <h2>Cat Gallery</h2>
-
+      <h2 style="white-space: nowrap">Cat Gallery</h2>
       <ul>
         <li><a href="#sec0">Introduction</a></li>
         <li><a href="#sec1">Functions</a></li>
         <li><a href="#sec2">Advantages</a></li>
       </ul>
-      <router-link to="/home" class="routerLink">Experience now</router-link>
+      <div @click="toHome" class="routerLink">Experience now</div>
     </header>
     <div id="sec0" class="sec0">
       <div style="overflow: hidden; border-radius: 20px">
@@ -27,9 +26,7 @@
           <li>Instant previews for your favorite cat selections</li>
           <li>Enjoy fast delivery on all image requests</li>
         </ul>
-        <router-link to="/home" class="routerLink"
-          >Request Your Cat Image Now</router-link
-        >
+        <div @click="toHome" class="routerLink">Request Your Cat Image Now</div>
       </div>
     </div>
     <div id="sec1" class="sec1">
@@ -140,6 +137,9 @@ export default {
   },
 
   methods: {
+    toHome() {
+      this.$router.push("/home");
+    },
     scrollLeft() {
       var lastItem = this.imgs.pop();
       this.imgs.unshift(lastItem);
@@ -175,7 +175,7 @@ body {
 .content {
   position: relative;
   min-width: 1000px;
-  background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 30%);
+  background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 40%);
 }
 
 .header {
@@ -188,20 +188,21 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 5px 0px grey;
   z-index: 1;
+  gap: 120px;
 }
 
 .header ul {
   display: flex;
-  margin-left: 100px;
+  align-items: center;
   margin-top: 0;
   padding-left: 0px;
   margin-bottom: 0;
-  gap: 100px;
+  gap: 80px;
 }
 
 .header ul li {
   list-style-type: none;
-  height: 60px;
+  height: 50px;
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -217,7 +218,7 @@ body {
   line-height: 65px;
   text-decoration: none;
   font-size: large;
-  font-weight: bold;
+  font-weight: 400;
 
   color: black;
 }
@@ -262,13 +263,7 @@ h2 {
 }
 
 .sec0 .routerLink {
-  height: 50px;
-  width: 240px;
-  background-color: rgb(232, 209, 179);
-  border: none;
-  border-radius: 4px;
-  padding-left: 30px;
-  padding-right: 10px;
+  width: 260px;
   margin-left: 20px;
   margin-top: auto;
 }
