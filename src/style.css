@@ -58,16 +58,13 @@ img:hover {
 
 .routerLink {
   text-decoration: none;
-  height: 60px;
-  line-height: 60px;
-  width: 136px;
   background-color: rgb(232, 209, 179);
   color: black;
   /* positon:absolute; */
-  margin-left: auto;
   margin-right: 24px;
+  margin-left: auto;
+  padding: 10px;
   border-radius: 7px;
-  padding: 0 10px;
   box-shadow: 1px 1px 10px 0px grey;
   font-weight: bold;
   font-size: large;
@@ -75,4 +72,5 @@ img:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  transition: all 0.5s ease 0s;
 }

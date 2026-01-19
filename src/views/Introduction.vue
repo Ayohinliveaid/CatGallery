@@ -54,9 +54,8 @@
     </div>
     <div id="sec2" class="sec2">
       <!-- sec2: continuing updating! -->
-      <div class="sec2div">
-        <h2>Advantages</h2>
-      </div>
+
+      <h2>Advantages</h2>
       <!-- 
         <div class="gallery-container">
             <button id="scroll-left" v-on:click="this.scrollLeft">← 左移</button>
@@ -84,6 +83,7 @@
         </div>
         <button id="scroll-right" v-on:click="this.scrollRight">Right →</button>
       </div>
+      <div id="bottomButton" @click="toHome" class="routerLink">Experience now</div>
     </div>
   </div>
 </template>
@@ -149,8 +149,9 @@ export default {
         behavior: "smooth",
       });
     },
-    //set active li in header
+    //page scroll
     handleScroll() {
+      //select active li
       let hei = window.scrollY;
       let aArr = ["#li0", "#li1", "#li2"];
       let secArr = ["#sec0", "#sec1", "#sec2"];
@@ -173,6 +174,15 @@ export default {
           break;
         }
       }
+      //count "offsetBottom" and add animation for bottom button
+      let offsetBottom = Math.min(
+        document.documentElement.scrollHeight - window.innerHeight - window.scrollY + 15,
+        30
+      );
+      let bottomButton = document.getElementById("bottomButton");
+      bottomButton.style.transform = `translateY(${offsetBottom}px) scale(${
+        (30 - offsetBottom) / 30
+      })`;
     },
 
     scrollLeft() {
@@ -217,6 +227,7 @@ body {
   position: relative;
   min-width: 1000px;
   background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 40%);
+  /* overflow: hidden; */
 }
 
 .header {
@@ -230,6 +241,7 @@ body {
   box-shadow: 0 1px 5px 0px grey;
   z-index: 1;
   gap: 120px;
+  max-height: 2000px;
 }
 
 .header ul {
@@ -249,11 +261,13 @@ body {
   align-items: center;
   box-shadow: 1px 1px 5px 0px grey;
   padding: 0 10px;
+  transition: transform 0.3s ease 0s;
 }
 
 .header ul li:hover {
   background-color: rgba(213, 173, 120, 0.3);
   cursor: pointer;
+  transform: scale(1.05);
 }
 
 .header ul li a {
@@ -352,10 +366,8 @@ h2 {
 .sec2 {
   height: 600px;
   margin-top: 70px;
-}
-.sec2 .sec2div {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -409,5 +421,12 @@ h2 {
   margin: 20px;
   cursor: pointer;
   border-radius: 3px;
+}
+.sec2 .routerLink {
+  padding: 0 auto;
+  position: relative;
+  margin-top: 60px;
+  transition: all 0s ease 0s;
+  margin-left: 0;
 }
 </style>
