@@ -66,7 +66,13 @@
             <button id="scroll-right" v-on:click="this.scrollRight">右移 →</button>
         </div> -->
       <div class="gallery-container">
-        <button id="scroll-left" v-on:click="this.scrollVertically('l')">← Left</button>
+        <button
+          v-show="scrollButtonShow"
+          id="scroll-left"
+          v-on:click="this.scrollVertically('l')"
+        >
+          ← Left
+        </button>
         <div class="gallery" id="gallery">
           <div
             v-for="div in divs"
@@ -79,7 +85,13 @@
             <p>{{ div.content }}</p>
           </div>
         </div>
-        <button id="scroll-right" v-on:click="this.scrollVertically('r')">Right →</button>
+        <button
+          v-show="scrollButtonShow"
+          id="scroll-right"
+          v-on:click="this.scrollVertically('r')"
+        >
+          Right →
+        </button>
       </div>
       <div id="bottomButton" @click="toHome" class="routerLink">Experience now</div>
     </div>
@@ -135,6 +147,7 @@ export default {
         // {id:4,color:"purple" }
       ],
       scrollPosition: 0,
+      scrollButtonShow: false,
     };
   },
 
@@ -211,11 +224,13 @@ export default {
       });
 
       if (this.scrollPosition % 4 == 0) {
-        this.presetGallery();
+        this.resetGallery();
       }
     },
-    presetGallery() {
+    persetGallery() {
       this.divs = [...this.divs, ...this.divs, ...this.divs]; //triplicate the divs for smooth scrolling);
+    },
+    resetGallery() {
       nextTick(() => {
         setTimeout(() => {
           gallery.scrollTo({
@@ -226,11 +241,24 @@ export default {
         }, 300);
       });
     },
-    autoScrollGallery() {},
+    autoScrollGallery() {
+      let gallery = document.querySelector(".gallery");
+      if (gallery.scrollLeft > 290 * 4) {
+        this.scrollButtonShow = true;
+        return;
+      } else {
+        gallery.scrollBy({
+          left: 2,
+          behavior: "auto",
+        });
+        window.requestAnimationFrame(() => this.autoScrollGallery());
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
-    this.presetGallery();
+    this.persetGallery();
+    window.requestAnimationFrame(this.autoScrollGallery);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
