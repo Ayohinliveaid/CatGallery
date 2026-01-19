@@ -4,9 +4,9 @@
       <!-- <img src=""  alt="LOGO"/> -->
       <h2 style="white-space: nowrap">Cat Gallery</h2>
       <ul>
-        <li><a href="#sec0">Introduction</a></li>
-        <li><a href="#sec1">Functions</a></li>
-        <li><a href="#sec2">Advantages</a></li>
+        <li id="li0"><a @click="scrollToSec('#sec0')">Introduction</a></li>
+        <li id="li1"><a @click="scrollToSec('#sec1')">Functions</a></li>
+        <li id="li2"><a @click="scrollToSec('#sec2')">Advantages</a></li>
       </ul>
       <div @click="toHome" class="routerLink">Experience now</div>
     </header>
@@ -16,7 +16,7 @@
       </div>
 
       <div class="sec0div">
-        <h1>Welcome to the Electric Cat Gallery</h1>
+        <h1>Welcome to <br />the Electric Cat Gallery</h1>
         <p>
           Explore a vibrant collection of stunning cat images powered by our advanced
           image sourcing technology.
@@ -140,6 +140,41 @@ export default {
     toHome() {
       this.$router.push("/home");
     },
+    //page scrolling functions
+    scrollToSec(id) {
+      let top = document.querySelector(id).offsetTop;
+      let hei = document.querySelector(".header").offsetHeight;
+      window.scrollTo({
+        top: top - hei,
+        behavior: "smooth",
+      });
+    },
+    //set active li in header
+    handleScroll() {
+      let hei = window.scrollY;
+      let aArr = ["#li0", "#li1", "#li2"];
+      let secArr = ["#sec0", "#sec1", "#sec2"];
+      let topArr = secArr.map((id) => {
+        return (
+          document.querySelector(id).offsetTop -
+          document.querySelector(".header").offsetHeight
+        );
+      });
+
+      for (let i = 0; i <= topArr.length - 1; i++) {
+        let v = topArr[i];
+        let nex = i + 1 <= topArr.length - 1 ? topArr[i + 1] : Number.POSITIVE_INFINITY;
+        if (hei >= v && hei < nex) {
+          aArr.forEach((vv, ii) => {
+            document.querySelector(vv).style.background = "none";
+          });
+          let ele = document.querySelector(aArr[i]);
+          ele.style.background = "rgba(232, 209, 179, 0.6)";
+          break;
+        }
+      }
+    },
+
     scrollLeft() {
       var lastItem = this.imgs.pop();
       this.imgs.unshift(lastItem);
@@ -162,6 +197,12 @@ export default {
         behavior: "auto",
       });
     },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
@@ -206,12 +247,13 @@ body {
   border-radius: 7px;
   display: flex;
   align-items: center;
-  box-shadow: 1px 1px 10px 0px grey;
+  box-shadow: 1px 1px 5px 0px grey;
   padding: 0 10px;
 }
 
 .header ul li:hover {
   background-color: rgba(213, 173, 120, 0.3);
+  cursor: pointer;
 }
 
 .header ul li a {
@@ -219,8 +261,6 @@ body {
   text-decoration: none;
   font-size: large;
   font-weight: 400;
-
-  color: black;
 }
 
 .sec0 {
@@ -310,7 +350,7 @@ h2 {
 }
 
 .sec2 {
-  height: 500px;
+  height: 600px;
   margin-top: 70px;
 }
 .sec2 .sec2div {
