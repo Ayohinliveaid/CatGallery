@@ -11,7 +11,7 @@
       <div @click="toHome" class="routerLink">Experience now</div>
     </header>
     <div id="sec0" class="sec0">
-      <div style="overflow: hidden; border-radius: 20px">
+      <div style="overflow: hidden; border-radius: 20px; min-width: 418px">
         <img src="/CatFace.png" alt="CatFace" />
       </div>
 
@@ -66,22 +66,20 @@
             <button id="scroll-right" v-on:click="this.scrollRight">右移 →</button>
         </div> -->
       <div class="gallery-container">
-        <button id="scroll-left" v-on:click="this.scrollLeft">← Left</button>
+        <button id="scroll-left" v-on:click="this.scrollVertically('l')">← Left</button>
         <div class="gallery" id="gallery">
           <div
             v-for="div in divs"
             v-bind:key="div.id"
             v-bind:style="{
               backgroundColor: div.color,
-              padding: '10px',
-              borderRadius: '10px',
             }"
           >
             <h3>{{ div.title }}</h3>
             <p>{{ div.content }}</p>
           </div>
         </div>
-        <button id="scroll-right" v-on:click="this.scrollRight">Right →</button>
+        <button id="scroll-right" v-on:click="this.scrollVertically('r')">Right →</button>
       </div>
       <div id="bottomButton" @click="toHome" class="routerLink">Experience now</div>
     </div>
@@ -89,6 +87,8 @@
 </template>
 
 <script>
+import { nextTick } from "vue";
+
 export default {
   name: "Login",
   data() {
@@ -103,44 +103,47 @@ export default {
         { src: "", alt: "i5" },
       ],
       divs: [
+        //triplicate it when mounted to scroll smoothly
         {
           id: 0,
-          color: "#FFCCCB",
+          color: "grey",
           title: "Instant Access to Cat Images",
           content:
             "Users can effortlessly request and enjoy beautiful cat images at the click of a button, enhancing their browsing experience",
         },
         {
           id: 1,
-          color: "lightyellow",
+          color: "black",
           title: "Favorites Collection",
           content:
             "The platform allows users to easily add cat images to a favorites collection, making it simple to curate and revisit preferred images",
         },
         {
           id: 2,
-          color: "lightgreen",
+          color: "black",
           title: "Single-Page Navigation",
           content:
             "Users benefit from smooth navigation throughout different sections of the gallery on a single page, streamlining their experience without unnecessary page loads",
         },
         {
           id: 3,
-          color: "lightblue",
+          color: "black",
           title: "Personalized Experience:",
           content:
             " By signing up or logging in, users can save and access their favorite images anytime, providing a more tailored and convenient experience",
         },
         // {id:4,color:"purple" }
       ],
+      scrollPosition: 0,
     };
   },
 
   methods: {
+    //navigate to home page
     toHome() {
       this.$router.push("/home");
     },
-    //page scrolling functions
+    //scrolling navigation
     scrollToSec(id) {
       let top = document.querySelector(id).offsetTop;
       let hei = document.querySelector(".header").offsetHeight;
@@ -149,7 +152,7 @@ export default {
         behavior: "smooth",
       });
     },
-    //page scroll
+    //page scroll automation
     handleScroll() {
       //select active li
       let hei = window.scrollY;
@@ -185,31 +188,49 @@ export default {
       })`;
     },
 
-    scrollLeft() {
-      var lastItem = this.imgs.pop();
-      this.imgs.unshift(lastItem);
-      var lastItem = this.divs.pop();
-      this.divs.unshift(lastItem);
+    //sec2 scrolling logic: 8 elements in total, when scroll to the second 4, scroll to the first 4 again
+    //enlong the arr the unshift the array to make endless arr will result scrolling false: no left space to scroll
+    //scroll to left is precise, but the reverse is not
+    scrollVertically(direction) {
+      let ele = document.querySelector(".gallery div");
+      let style = getComputedStyle(ele);
+
+      let len = ele.getBoundingClientRect().width + Number.parseFloat(style.marginRight);
+      if (direction == "r") {
+        this.scrollPosition += 1;
+      } else {
+        len = -len;
+        this.scrollPosition -= 1;
+      }
+      console.log(len);
+      //scroll to left is precise, but the reverse is not
       var gallery = document.getElementById("gallery");
-      gallery.scrollBy({
-        left: -270,
-        behavior: "auto",
+      gallery.scrollTo({
+        left: gallery.scrollLeft + len,
+        behavior: "smooth",
+      });
+
+      if (this.scrollPosition % 4 == 0) {
+        this.presetGallery();
+      }
+    },
+    presetGallery() {
+      this.divs = [...this.divs, ...this.divs, ...this.divs]; //triplicate the divs for smooth scrolling);
+      nextTick(() => {
+        setTimeout(() => {
+          gallery.scrollTo({
+            left: 290 * 4,
+            behavior: "auto",
+          });
+          console.log(document.getElementById("gallery").scrollLeft);
+        }, 300);
       });
     },
-    scrollRight() {
-      var firstItem = this.imgs.shift();
-      this.imgs.push(firstItem);
-      var firstItem = this.divs.shift();
-      this.divs.push(firstItem);
-      var gallery = document.getElementById("gallery");
-      gallery.scrollBy({
-        left: 270,
-        behavior: "auto",
-      });
-    },
+    autoScrollGallery() {},
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
+    this.presetGallery();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -412,6 +433,8 @@ h2 {
   flex-shrink: 0;
   height: 300px;
   box-sizing: content-box;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .gallery-container button {
