@@ -5,8 +5,8 @@
       <h2 style="white-space: nowrap">Cat Gallery</h2>
       <ul>
         <li id="li0"><a @click="scrollToSec('#sec0')">Introduction</a></li>
-        <li id="li1"><a @click="scrollToSec('#sec1')">Functions</a></li>
-        <li id="li2"><a @click="scrollToSec('#sec2')">Advantages</a></li>
+        <li id="li1"><a @click="scrollToSec('#sec1')">Advantages</a></li>
+        <li id="li2"><a @click="scrollToSec('#sec2')">Functions</a></li>
       </ul>
       <div @click="toHome" class="routerLink">Experience now</div>
     </header>
@@ -30,30 +30,7 @@
       </div>
     </div>
     <div id="sec1" class="sec1">
-      <div>
-        <h2>Functions</h2>
-      </div>
-      <div class="sec1div">
-        <div style="background-color: #ffcccb">
-          <h3>Browse & Enjoy</h3>
-          Instantly request and display beautiful cat images with a click.
-        </div>
-        <div style="background-color: lightyellow">
-          <h3>Save Your Favorites</h3>
-          Easily add any cat image to your favorites collection.
-        </div>
-        <div style="background-color: lightgreen">
-          <h3>Smooth Navigation</h3>
-          Navigate through different sections of the gallery all on a single page.
-        </div>
-        <div style="background-color: lightblue">
-          <h3>Personalize Your Experience</h3>
-          Sign up or log in to save and access your favorite images anytime.
-        </div>
-      </div>
-    </div>
-    <div id="sec2" class="sec2">
-      <!-- sec2: continuing updating! -->
+      <!-- sec1: continuing updating! -->
 
       <h2>Advantages</h2>
       <!-- 
@@ -74,13 +51,7 @@
           ← Left
         </button>
         <div class="gallery" id="gallery">
-          <div
-            v-for="div in divs"
-            v-bind:key="div.id"
-            v-bind:style="{
-              backgroundColor: div.color,
-            }"
-          >
+          <div v-bind:id="div.id" v-for="div in advantages" v-bind:key="div.id">
             <h3>{{ div.title }}</h3>
             <p>{{ div.content }}</p>
           </div>
@@ -92,6 +63,17 @@
         >
           Right →
         </button>
+      </div>
+    </div>
+    <div id="sec2" class="sec2">
+      <div>
+        <h2>Functions</h2>
+      </div>
+      <div class="sec2div">
+        <div v-for="func in functions" v-bind:key="func.title">
+          <h3>{{ func.title }}</h3>
+          {{ func.content }}
+        </div>
       </div>
       <div id="bottomButton" @click="toHome" class="routerLink">Experience now</div>
     </div>
@@ -114,37 +96,60 @@ export default {
         { src: "", alt: "i4" },
         { src: "", alt: "i5" },
       ],
-      divs: [
+      advantages: [
         //triplicate it when mounted to scroll smoothly
         {
-          id: 0,
-          color: "grey",
+          id: "galleryItem0",
+          color: "rgba(232, 209, 179, 0.6)",
           title: "Instant Access to Cat Images",
           content:
             "Users can effortlessly request and enjoy beautiful cat images at the click of a button, enhancing their browsing experience",
         },
         {
-          id: 1,
-          color: "black",
+          id: "galleryItem1",
+          color: "rgba(232, 209, 179, 0.6)",
           title: "Favorites Collection",
           content:
             "The platform allows users to easily add cat images to a favorites collection, making it simple to curate and revisit preferred images",
         },
         {
-          id: 2,
-          color: "black",
+          id: "galleryItem2",
+          color: "rgba(232, 209, 179, 0.6)",
           title: "Single-Page Navigation",
           content:
             "Users benefit from smooth navigation throughout different sections of the gallery on a single page, streamlining their experience without unnecessary page loads",
         },
         {
-          id: 3,
-          color: "black",
+          id: "galleryItem3",
+          color: "rgba(232, 209, 179, 0.6)",
           title: "Personalized Experience:",
           content:
             " By signing up or logging in, users can save and access their favorite images anytime, providing a more tailored and convenient experience",
         },
         // {id:4,color:"purple" }
+      ],
+      functions: [
+        {
+          color: "#ffcccb",
+          title: "Browse & Enjoy",
+          content: "Instantly request and display beautiful cat images with a click.",
+        },
+        {
+          color: "lightyellow",
+          title: "Save Your Favorites",
+          content: "Easily add any cat image to your favorites collection.",
+        },
+        {
+          color: "lightgreen",
+          title: "Smooth Navigation",
+          content:
+            "Navigate through different sections of the gallery all on a single page.",
+        },
+        {
+          color: "lightblue",
+          title: "Personalize Your Experience",
+          content: "Sign up or log in to save and access your favorite images anytime.",
+        },
       ],
       scrollPosition: 0,
       scrollButtonShow: false,
@@ -201,7 +206,7 @@ export default {
       })`;
     },
 
-    //sec2 scrolling logic: 8 elements in total, when scroll to the second 4, scroll to the first 4 again
+    //sec1 scrolling logic: 8 elements in total, when scroll to the second 4, scroll to the first 4 again
     //enlong the arr the unshift the array to make endless arr will result scrolling false: no left space to scroll
     //scroll to left is precise, but the reverse is not
     scrollVertically(direction) {
@@ -228,7 +233,7 @@ export default {
       }
     },
     persetGallery() {
-      this.divs = [...this.divs, ...this.divs, ...this.divs]; //triplicate the divs for smooth scrolling);
+      this.advantages = [...this.advantages, ...this.advantages, ...this.advantages]; //triplicate the advantages for smooth scrolling);
     },
     resetGallery() {
       nextTick(() => {
@@ -254,11 +259,28 @@ export default {
         window.requestAnimationFrame(() => this.autoScrollGallery());
       }
     },
+    getRandomColor() {
+      let r = Math.floor(Math.random() * 256);
+      let g = Math.floor(Math.random() * 256);
+      let b = Math.floor(Math.random() * 256);
+      return `rgba(${r},${g},${b},0.3)`;
+    },
+    presetDivBac() {
+      nextTick(() => {
+        for (let v of this.advantages) {
+          let ele = document.querySelector(`#${v.id}`);
+          ele.style.background = `radial-gradient(at ${Math.random() * 100}% ${
+            Math.random() * 100
+          }%,${this.getRandomColor()},rgba(232, 209, 179, 0.5))`;
+        }
+      });
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
     this.persetGallery();
-    window.requestAnimationFrame(this.autoScrollGallery);
+    // window.requestAnimationFrame(this.autoScrollGallery);
+    this.presetDivBac();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -376,44 +398,7 @@ h2 {
 }
 
 .sec1 {
-  margin-top: 70px;
-}
-
-.sec1 div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* margin: 30px; */
-}
-
-.sec1div {
-  display: flex;
-
-  justify-content: center;
-  margin-left: 5vw;
-  margin-right: 5vw;
-}
-
-.sec1div div {
-  height: 500px;
-  width: 20vw;
-  min-width: 180px;
-  background-color: antiquewhite;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px 10px rgb(249, 241, 231);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 20px;
-}
-
-.sec1div div:hover {
-  background-color: rgb(238, 222, 199);
-}
-
-.sec2 {
-  height: 600px;
+  height: 400px;
   margin-top: 70px;
   display: flex;
   flex-direction: column;
@@ -463,6 +448,9 @@ h2 {
   box-sizing: content-box;
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gallery-container button {
@@ -473,7 +461,51 @@ h2 {
   cursor: pointer;
   border-radius: 3px;
 }
+
+.sec2 {
+  margin-top: 70px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sec2 div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 30px; */
+}
+
+.sec2div {
+  display: flex;
+
+  justify-content: center;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.sec2div div {
+  height: 500px;
+  width: 20vw;
+  min-width: 180px;
+  background-color: antiquewhite;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 10px rgb(249, 241, 231);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  transition: all 0.5s ease 0s;
+}
+
+.sec2div div:hover {
+  background-color: rgb(238, 222, 199);
+}
+
 .sec2 .routerLink {
+  width: 200px;
   padding: 0 auto;
   position: relative;
   margin-top: 60px;
