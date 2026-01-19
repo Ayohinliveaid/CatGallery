@@ -313,7 +313,7 @@ h2 {
   height: 500px;
   margin-top: 70px;
 }
-v .sec2 .sec2div {
+.sec2 .sec2div {
   display: flex;
   justify-content: center;
   align-items: center;
