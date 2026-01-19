@@ -51,7 +51,12 @@
           ← Left
         </button>
         <div class="gallery" id="gallery">
-          <div v-bind:id="div.id" v-for="div in advantages" v-bind:key="div.id">
+          <div
+            v-bind:id="div.id"
+            v-for="div in advantages"
+            v-bind:key="div.id"
+            v-bind:style="{ background: div.background }"
+          >
             <h3>{{ div.title }}</h3>
             <p>{{ div.content }}</p>
           </div>
@@ -70,12 +75,12 @@
         <h2>Functions</h2>
       </div>
       <div class="sec2div">
-        <div v-for="func in functions" v-bind:key="func.title">
+        <div v-for="func in functions" v-bind:id="func.id" v-bind:key="func.title">
           <h3>{{ func.title }}</h3>
           {{ func.content }}
         </div>
+        <div id="bottomButton" @click="toHome" class="bottomButton">Experience now</div>
       </div>
-      <div id="bottomButton" @click="toHome" class="routerLink">Experience now</div>
     </div>
   </div>
 </template>
@@ -104,6 +109,7 @@ export default {
           title: "Instant Access to Cat Images",
           content:
             "Users can effortlessly request and enjoy beautiful cat images at the click of a button, enhancing their browsing experience",
+          background: null,
         },
         {
           id: "galleryItem1",
@@ -111,6 +117,7 @@ export default {
           title: "Favorites Collection",
           content:
             "The platform allows users to easily add cat images to a favorites collection, making it simple to curate and revisit preferred images",
+          background: null,
         },
         {
           id: "galleryItem2",
@@ -118,6 +125,7 @@ export default {
           title: "Single-Page Navigation",
           content:
             "Users benefit from smooth navigation throughout different sections of the gallery on a single page, streamlining their experience without unnecessary page loads",
+          background: null,
         },
         {
           id: "galleryItem3",
@@ -125,27 +133,32 @@ export default {
           title: "Personalized Experience:",
           content:
             " By signing up or logging in, users can save and access their favorite images anytime, providing a more tailored and convenient experience",
+          background: null,
         },
         // {id:4,color:"purple" }
       ],
       functions: [
         {
+          id: "func0",
           color: "#ffcccb",
           title: "Browse & Enjoy",
           content: "Instantly request and display beautiful cat images with a click.",
         },
         {
+          id: "func1",
           color: "lightyellow",
           title: "Save Your Favorites",
           content: "Easily add any cat image to your favorites collection.",
         },
         {
+          id: "func2",
           color: "lightgreen",
           title: "Smooth Navigation",
           content:
             "Navigate through different sections of the gallery all on a single page.",
         },
         {
+          id: "func3",
           color: "lightblue",
           title: "Personalize Your Experience",
           content: "Sign up or log in to save and access your favorite images anytime.",
@@ -202,7 +215,7 @@ export default {
       );
       let bottomButton = document.getElementById("bottomButton");
       bottomButton.style.transform = `translateY(${offsetBottom}px) scale(${
-        (30 - offsetBottom) / 30
+        (30 - offsetBottom) / 35
       })`;
     },
 
@@ -234,6 +247,7 @@ export default {
     },
     persetGallery() {
       this.advantages = [...this.advantages, ...this.advantages, ...this.advantages]; //triplicate the advantages for smooth scrolling);
+      this.presetDivBac();
     },
     resetGallery() {
       nextTick(() => {
@@ -259,28 +273,37 @@ export default {
         window.requestAnimationFrame(() => this.autoScrollGallery());
       }
     },
-    getRandomColor() {
+    getRandomColor(opacity = 0.3) {
       let r = Math.floor(Math.random() * 256);
       let g = Math.floor(Math.random() * 256);
       let b = Math.floor(Math.random() * 256);
-      return `rgba(${r},${g},${b},0.3)`;
+      return `rgba(${r},${g},${b},${opacity})`;
     },
     presetDivBac() {
       nextTick(() => {
         for (let v of this.advantages) {
+          v.background = `radial-gradient(at ${Math.random() * 100}% ${
+            Math.random() * 100
+          }%,rgba(232, 209, 179, 0.8),${this.getRandomColor(0.05)})`;
+        }
+      });
+    },
+    presetFunBac() {
+      nextTick(() => {
+        for (let v of this.functions) {
           let ele = document.querySelector(`#${v.id}`);
           ele.style.background = `radial-gradient(at ${Math.random() * 100}% ${
             Math.random() * 100
-          }%,${this.getRandomColor()},rgba(232, 209, 179, 0.5))`;
+          }%,${this.getRandomColor(0.2)},rgba(232, 209, 179, 0.6))`;
         }
       });
     },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
+    window.requestAnimationFrame(this.autoScrollGallery);
+    this.presetFunBac();
     this.persetGallery();
-    // window.requestAnimationFrame(this.autoScrollGallery);
-    this.presetDivBac();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -470,46 +493,55 @@ h2 {
   align-items: center;
 }
 
-.sec2 div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* margin: 30px; */
-}
-
 .sec2div {
-  display: flex;
-
-  justify-content: center;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  display: grid;
+  grid-template: 2fr 1fr 1fr / repeat(4, 1fr);
+  grid-gap: 10px;
+  width: 900px;
+  height: 600px;
 }
-
 .sec2div div {
-  height: 500px;
-  width: 20vw;
-  min-width: 180px;
-  background-color: antiquewhite;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px 10px rgb(249, 241, 231);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 20px;
   transition: all 0.5s ease 0s;
+  /* box-shadow: 0 0 20px 10px rgb(249, 241, 231); */
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.sec2div div:hover {
-  background-color: rgb(238, 222, 199);
+.sec2div #func0 {
+  grid-column: 1/3;
+  grid-row: 1/3;
+}
+.sec2div #func1 {
+  grid-column: 4/5;
+  grid-row: 2/5;
+}
+.sec2div #func2 {
+  grid-column: 1/4;
+  grid-row: 3/5;
+}
+.sec2div #func3 {
+  grid-column: 3/5;
+  grid-row: 1/2;
 }
 
-.sec2 .routerLink {
-  width: 200px;
-  padding: 0 auto;
+.bottomButton {
+  grid-column: 3/4;
+  grid-row: 2/3;
+  width: auto;
+  background-color: rgb(232, 209, 179);
   position: relative;
-  margin-top: 60px;
   transition: all 0s ease 0s;
-  margin-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 30px;
+}
+.bottomButton:hover {
+  background-color: rgb(213, 173, 120);
+  cursor: pointer;
 }
 </style>
