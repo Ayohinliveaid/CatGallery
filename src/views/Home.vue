@@ -473,7 +473,7 @@ export default {
 
 @media screen and (width<=400px) {
   .window {
-    height: 40vh;
+    height: 45vh;
   }
 }
 </style>
