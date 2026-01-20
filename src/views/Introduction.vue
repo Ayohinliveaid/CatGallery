@@ -312,32 +312,6 @@ export default {
 </script>
 
 <style>
-body {
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
-}
-.content {
-  position: relative;
-  min-width: 1000px;
-  background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 40%);
-  /* overflow: hidden; */
-}
-
-.header {
-  background-color: rgba(250, 235, 215, 0.3);
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 5px 0px grey;
-  z-index: 1;
-  gap: 120px;
-  max-height: 2000px;
-}
-
 .header ul {
   display: flex;
   align-items: center;

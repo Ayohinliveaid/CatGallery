@@ -1,18 +1,14 @@
 <template>
-  <el-container>
-    <el-header>
-      Cat Gallery
-      <router-link to="/" class="routerLink introButton">introduction</router-link>
-    </el-header>
-    <el-main>
-      <el-tabs stretch v-model="activeName">
+  <div class="content">
+    <header class="header">
+      <h2 style="white-space: nowrap">Cat Gallery</h2>
+      <router-link to="/" class="routerLink">introduction</router-link>
+    </header>
+    <div>
+      <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
-          <el-tabs tab-position="left" style="margin-top: 10px; height: 100%">
+          <el-tabs tab-position="left">
             <el-tab-pane id="mainPane" label="Main Cats">
-              <el-button type="primary" class="buttonStyle" v-on:click="requestMainCats">
-                other cats</el-button
-              >
-
               <el-space direction="vertical" alignment="normal" class="spaceStyle">
                 <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
                   <el-card class="cardStyle">
@@ -20,7 +16,7 @@
                       v-if="cat"
                       v-bind:src="cat.url"
                       alt="Cat Image"
-                      style="height: 700px"
+                      style="height: 400px"
                     />
                   </el-card>
 
@@ -35,6 +31,14 @@
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
+                <el-button
+                  type="primary"
+                  style="margin: 10px; margin-right: 0"
+                  class="buttonStyle"
+                  v-on:click="requestMainCats"
+                >
+                  other cats</el-button
+                >
               </el-space>
             </el-tab-pane>
             <el-tab-pane label="Animated Cats">
@@ -42,6 +46,7 @@
                 type="primary"
                 class="buttonStyle"
                 v-on:click="requestAnimatedCats"
+                style="margin: 10px"
                 >more cats</el-button
               >
 
@@ -169,12 +174,13 @@
           >
         </el-tab-pane>
       </el-tabs>
-    </el-main>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import { nextTick } from "vue";
 
 export default {
   name: "Home",
@@ -197,23 +203,30 @@ export default {
   },
   methods: {
     requestMainCats: function () {
-      axios
-        .get("https://api.thecatapi.com/v1/images/search?limit=3&mime_types=png", {
-          headers: {
-            "x-api-key":
-              "live_QTQoXsscFALX63br8NHnps2gMpgK0qiTiTNot1j6oVNcDDe2fdOzkZYfzcqDA8dK",
-          },
-        })
-        .then((response) => {
-          // alert(JSON.stringify(response.data));  // Output the data received from the request
-          this.mainCats = response.data.map((cat) => ({
-            id: cat.id,
-            url: cat.url,
-          }));
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error); // Handle any errors
-        });
+      let ele = document.querySelector("#mainPane");
+      ele.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      nextTick(() => {
+        axios
+          .get("https://api.thecatapi.com/v1/images/search?limit=3&mime_types=png", {
+            headers: {
+              "x-api-key":
+                "live_QTQoXsscFALX63br8NHnps2gMpgK0qiTiTNot1j6oVNcDDe2fdOzkZYfzcqDA8dK",
+            },
+          })
+          .then((response) => {
+            // alert(JSON.stringify(response.data));  // Output the data received from the request
+            this.mainCats = response.data.map((cat) => ({
+              id: cat.id,
+              url: cat.url,
+            }));
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error); // Handle any errors
+          });
+      });
     },
     requestAnimatedCats: function () {
       axios
@@ -317,12 +330,15 @@ export default {
     font-size: 40px;
 
 } */
-.introButton {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 0;
-  color: rgba(82, 56, 23, 0.691);
+body {
+  /* overflow: hidden; */
+}
+.content {
+  min-width: 0px;
+}
+
+.header {
+  height: 10vh;
 }
 
 .window {
@@ -336,21 +352,23 @@ export default {
   transform: translate(-50%, -50%);
 }
 
+#outerTab {
+  height: 90vh;
+}
+
 #mainPane.el-tab-pane {
   overflow: auto;
   position: relative;
+  height: calc(100vh - 120px);
 }
 
 .el-button.buttonStyle {
   background-color: rgb(233, 208, 176);
   border: none;
   color: rgba(82, 56, 23, 0.691);
+  width: 100%;
   margin-bottom: 10px;
-  position: sticky;
-  left: 0;
-
-  /* position:absolute;
-    right:10px; */
+  transition: all 0.5s ease 0s;
 }
 
 .el-button.buttonStyle:hover {
@@ -361,7 +379,7 @@ export default {
 
 .cardDiv {
   display: flex;
-  width: 1500px;
+  width: 700px;
   overflow: auto;
 }
 

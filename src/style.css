@@ -1,5 +1,29 @@
 body {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
   margin: 0;
+}
+
+.content {
+  position: relative;
+  min-width: 1000px;
+  background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 40%);
+  /* overflow: hidden; */
+}
+
+.header {
+  background-color: rgba(250, 235, 215, 0.3);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 5px 0px grey;
+  z-index: 1000;
+  gap: 120px;
+  /* max-height: 2000px; */
 }
 
 img {
@@ -9,25 +33,6 @@ img {
 
 img:hover {
   transform: scale(1.03);
-}
-
-/* costom element-plus style */
-.el-container {
-  width: 100vw;
-  height: 100vh;
-}
-
-.el-header {
-  background-color: antiquewhite;
-  text-align: center;
-  line-height: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.691);
-}
-
-.el-main {
-  background-color: rgb(252, 246, 240);
 }
 
 .el-tabs .el-tabs__item {
