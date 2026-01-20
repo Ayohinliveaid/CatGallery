@@ -379,7 +379,7 @@ body {
 
 .cardDiv {
   display: flex;
-  width: 700px;
+  width: 800px;
   overflow: auto;
 }
 
