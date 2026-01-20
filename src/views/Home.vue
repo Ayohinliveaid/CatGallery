@@ -9,47 +9,37 @@
         <el-tab-pane label="Cats" name="cats" class="catsPane">
           <el-tabs tab-position="left">
             <el-tab-pane id="mainPane" label="Main Cats">
-              <el-space direction="vertical" alignment="normal" class="spaceStyle">
-                <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
-                  <el-card class="cardStyle">
-                    <img
-                      v-if="cat"
-                      v-bind:src="cat.url"
-                      alt="Cat Image"
-                      style="height: 400px"
-                    />
-                  </el-card>
+              <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
+                <el-card class="cardStyle">
+                  <img
+                    v-if="cat"
+                    v-bind:src="cat.url"
+                    alt="Cat Image"
+                    style="height: 400px"
+                  />
+                </el-card>
 
-                  <el-card style="flex: 1" class="cardStyle0">
-                    <el-button
-                      type="primary"
-                      class="buttonStyle"
-                      v-on:click="addToFavourites(cat)"
-                      >favourite</el-button
-                    >
-                    <br />
-                    CatID: {{ cat.id }}
-                  </el-card>
-                </div>
-                <el-button
-                  type="primary"
-                  style="margin: 10px; margin-right: 0"
-                  class="buttonStyle"
-                  v-on:click="requestMainCats"
-                >
-                  other cats</el-button
-                >
-              </el-space>
-            </el-tab-pane>
-            <el-tab-pane label="Animated Cats">
+                <el-card style="flex: 1" class="cardStyle0">
+                  <el-button
+                    type="primary"
+                    class="buttonStyle"
+                    v-on:click="addToFavourites(cat)"
+                    >favourite</el-button
+                  >
+                  <br />
+                  CatID: {{ cat.id }}
+                </el-card>
+              </div>
               <el-button
                 type="primary"
+                style="margin-left: 10px"
                 class="buttonStyle"
-                v-on:click="requestAnimatedCats"
-                style="margin: 10px"
-                >more cats</el-button
+                v-on:click="requestMainCats"
               >
-
+                other cats</el-button
+              >
+            </el-tab-pane>
+            <el-tab-pane id="animatedPane" label="Animated Cats">
               <el-space direction="vertical" alignment="normal">
                 <div
                   v-for="(cat, index) in animatedCats"
@@ -61,7 +51,7 @@
                       v-if="cat"
                       v-bind:src="cat.url"
                       alt="Cat Image"
-                      style="height: 700px"
+                      style="height: 400px"
                     />
                   </el-card>
                   <el-card style="flex: 1" class="cardStyle0">
@@ -74,6 +64,13 @@
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
+                <el-button
+                  type="primary"
+                  class="buttonStyle"
+                  v-on:click="requestAnimatedCats"
+                  style="margin-left: 10px"
+                  >more cats</el-button
+                >
               </el-space>
             </el-tab-pane>
           </el-tabs>
@@ -350,6 +347,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 10px 0px grey;
 }
 
 #outerTab {
@@ -357,6 +355,11 @@ body {
 }
 
 #mainPane.el-tab-pane {
+  overflow: auto;
+  position: relative;
+  height: calc(100vh - 120px);
+}
+#animatedPane.el-tab-pane {
   overflow: auto;
   position: relative;
   height: calc(100vh - 120px);
@@ -381,6 +384,7 @@ body {
   display: flex;
   width: 800px;
   overflow: auto;
+  margin-bottom: 10px;
 }
 
 .el-card.cardStyle {
