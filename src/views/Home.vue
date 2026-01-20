@@ -31,7 +31,7 @@
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
-                <div class="cardDiv buffer">
+                <div class="cardDiv buffer" v-if="!mainLoading">
                   <el-card class="cardStyle"> </el-card>
 
                   <el-card style="flex: 1" class="cardStyle0">
@@ -216,15 +216,11 @@ export default {
       },
       mainLoading: false,
       animatedLoading: false,
+      lastScrollTop: 0, //track scrolltop to identify scroll direction, only scroll down matters
     };
   },
   methods: {
     requestMainCats: function () {
-      // let ele = document.querySelector("#mainPane");
-      // ele.scrollTo({
-      //   top: 0,
-      //   behavior: "smooth",
-      // });
       this.mainLoading = true;
 
       nextTick(() => {
@@ -277,7 +273,6 @@ export default {
     },
     addToFavourites: function (cat) {
       if (this.isLoggedIn == false) {
-        alert("You need to login to save your favourites");
         this.activeName = "favourites";
       } else {
         // alert("The cat has been added to your favorites");
@@ -347,17 +342,22 @@ export default {
       let ele = document.querySelector("#mainPane");
       ele.addEventListener("scroll", () => {
         let { scrollTop, offsetHeight, scrollHeight } = ele;
-        if (scrollTop + offsetHeight > scrollHeight - 10) {
+        if (scrollTop > this.lastScrollTop && scrollTop + offsetHeight > scrollHeight) {
+          //identify scroll down
           if (!this.isLoggedIn && this.mainCats.length >= 6) {
+            // ele.scrollBy({
+            //   top: 20,
+            //   behavior: "auto",
+            // });
             alert("Log in to enjoy more cats!");
             this.activeName = "favourites";
           } else {
-            // this.requestMainCats();
             if (!this.mainLoading) {
               this.requestMainCats();
             }
           }
         }
+        this.lastScrollTop = scrollTop;
       });
     },
   },
