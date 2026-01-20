@@ -31,6 +31,15 @@
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
+                <div class="cardDiv buffer">
+                  <el-card class="cardStyle"> </el-card>
+
+                  <el-card style="flex: 1" class="cardStyle0">
+                    <el-button type="primary" class="buttonStyle">favourite</el-button>
+                    <br />
+                    CatID:
+                  </el-card>
+                </div>
                 <!-- <el-button
                 type="primary"
                 style="margin: 0 10px"
@@ -401,6 +410,10 @@ body {
   position: relative;
   height: calc(100vh - 120px);
 }
+.buffer {
+  height: 60px;
+}
+
 #animatedPane.el-tab-pane {
   overflow: auto;
   position: relative;
