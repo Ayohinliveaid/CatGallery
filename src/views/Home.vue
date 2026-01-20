@@ -32,7 +32,7 @@
               </div>
               <el-button
                 type="primary"
-                style="margin-left: 10px"
+                style="margin: 0 10px; width: 940px"
                 class="buttonStyle"
                 v-on:click="requestMainCats"
               >
@@ -382,7 +382,7 @@ body {
 
 .cardDiv {
   display: flex;
-  width: 800px;
+  width: 940px;
   overflow: auto;
   margin-bottom: 10px;
 }
