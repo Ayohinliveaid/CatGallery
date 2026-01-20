@@ -11,7 +11,7 @@
       <div @click="toHome" class="routerLink">Experience now</div>
     </header>
     <div id="sec0" class="sec0">
-      <div style="overflow: hidden; border-radius: 20px; min-width: 418px">
+      <div class="imgWrapper">
         <img src="/CatFace.png" alt="CatFace" />
       </div>
 
@@ -351,6 +351,12 @@ export default {
   max-height: 500px;
   min-height: 300px;
   display: flex;
+  width: 90%;
+}
+.imgWrapper {
+  overflow: hidden;
+  border-bottom-right-radius: 20px;
+  min-width: 418px;
 }
 .sec0 * {
   margin: 0;
@@ -363,7 +369,6 @@ export default {
 }
 
 .sec0div {
-  /* flex: 2; */
   height: 100%;
   display: flex;
   /* Add this to make it a flex container */
