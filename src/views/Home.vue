@@ -396,12 +396,13 @@ export default {
 
 .header {
   height: 10vh;
+  position: relative;
 }
 
 .window {
   background-color: antiquewhite;
   height: 50vh;
-  width: 60vh;
+  width: 80vw;
   position: fixed;
   /* positon:absolute;why absolute make the div non-visible? not compatible with element plus*/
   top: 50%;
