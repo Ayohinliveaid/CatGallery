@@ -448,7 +448,8 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  margin: 0 10px;
 }
 
 .gallery {
@@ -485,6 +486,7 @@ h2 {
   cursor: pointer;
   border-radius: 3px;
   color: black;
+  border-radius: 10px;
 }
 
 .sec2 {
