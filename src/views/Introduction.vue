@@ -484,6 +484,7 @@ h2 {
   padding: 10px;
   cursor: pointer;
   border-radius: 3px;
+  color: black;
 }
 
 .sec2 {

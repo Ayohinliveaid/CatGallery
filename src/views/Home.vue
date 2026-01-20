@@ -412,6 +412,7 @@ export default {
 
 #outerTab {
   height: 90vh;
+  overflow: hidden;
 }
 
 #mainPane {
