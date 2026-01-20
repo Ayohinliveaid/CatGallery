@@ -211,12 +211,13 @@ export default {
       //count "offsetBottom" and add animation for bottom button
       let offsetBottom = Math.min(
         document.documentElement.scrollHeight - window.innerHeight - window.scrollY + 15,
-        30
+        300
       );
       let bottomButton = document.getElementById("bottomButton");
-      bottomButton.style.transform = `translateY(${offsetBottom}px) scale(${
-        (30 - offsetBottom) / 35
-      })`;
+      // bottomButton.style.transform = `translateY(${offsetBottom}px) scale(${
+      //   (60 - offsetBottom) / 60
+      // })`;
+      bottomButton.style.transform = `scale(${(300 - offsetBottom) / 300})`;
     },
 
     //sec1 scrolling logic: 8 elements in total, when scroll to the second 4, scroll to the first 4 again
@@ -513,7 +514,7 @@ h2 {
   width: auto;
   background-color: rgb(232, 209, 179);
   position: relative;
-  transition: all 0s ease 0s;
+  /* transition: all 0s ease 0s; */
   display: flex;
   justify-content: center;
   align-items: center;
