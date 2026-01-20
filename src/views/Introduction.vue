@@ -130,7 +130,7 @@ export default {
         {
           id: "galleryItem3",
           color: "rgba(232, 209, 179, 0.6)",
-          title: "Personalized Experience:",
+          title: "Personalized Experience",
           content:
             " By signing up or logging in, users can save and access their favorite images anytime, providing a more tailored and convenient experience",
           background: null,
@@ -315,10 +315,11 @@ export default {
 .header ul {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 0;
   padding-left: 0px;
   margin-bottom: 0;
-  gap: 80px;
+  min-width: 400px;
 }
 
 .header ul li {
@@ -427,7 +428,7 @@ h2 {
 .gallery {
   display: flex;
   min-width: 670px;
-  width: 80vw;
+  width: 60vw;
   overflow-x: hidden;
   /* scroll-behavior: smooth; */
 }
@@ -472,7 +473,6 @@ h2 {
   display: grid;
   grid-template: 2fr 1fr 1fr / repeat(4, 1fr);
   grid-gap: 10px;
-  width: 900px;
   height: 600px;
 }
 .sec2div div {
@@ -482,7 +482,7 @@ h2 {
   transition: all 0.5s ease 0s;
   /* box-shadow: 0 0 20px 10px rgb(249, 241, 231); */
   padding: 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .sec2div #func0 {
@@ -514,6 +514,7 @@ h2 {
   align-items: center;
   font-weight: bold;
   font-size: 30px;
+  border-radius: 5px;
 }
 .bottomButton:hover {
   background-color: rgb(213, 173, 120);

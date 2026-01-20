@@ -7,7 +7,7 @@ body {
 
 .content {
   position: relative;
-  min-width: 1000px;
+  min-width: 800px;
   background: linear-gradient(120deg, rgb(232, 209, 179) 0%, rgb(252, 246, 240) 40%);
   /* overflow: hidden; */
 }
@@ -22,8 +22,8 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 1px 5px 0px grey;
   z-index: 1000;
-  gap: 120px;
-  /* justify-content: space-between; */
+  /* gap: 120px; */
+  justify-content: space-between;
   /* max-height: 2000px; */
 }
 
@@ -67,8 +67,8 @@ img:hover {
   background-color: rgb(232, 209, 179);
   color: black;
   /* positon:absolute; */
-  margin-right: 24px;
-  margin-left: auto;
+  margin-right: 10px;
+  /* margin-left: auto; */
   padding: 10px;
   border-radius: 7px;
   box-shadow: 1px 1px 10px 0px grey;
