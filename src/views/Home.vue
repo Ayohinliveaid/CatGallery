@@ -470,4 +470,10 @@ export default {
   overflow: auto;
   height: calc(100vh - 120px);
 }
+
+@media screen and (width<=400px) {
+  .window {
+    height: 40vh;
+  }
+}
 </style>
