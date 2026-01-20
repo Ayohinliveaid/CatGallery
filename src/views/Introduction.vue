@@ -58,7 +58,7 @@
             v-bind:style="{ background: div.background }"
           >
             <h3>{{ div.title }}</h3>
-            <p>{{ div.content }}</p>
+            <p v-if="showDetail">{{ div.content }}</p>
           </div>
         </div>
         <button
@@ -77,7 +77,7 @@
       <div class="sec2div">
         <div v-for="func in functions" v-bind:id="func.id" v-bind:key="func.title">
           <h3>{{ func.title }}</h3>
-          {{ func.content }}
+          <p v-if="showDetail">{{ func.content }}</p>
         </div>
         <div id="bottomButton" @click="toHome" class="bottomButton">Experience now</div>
       </div>
@@ -166,6 +166,8 @@ export default {
       ],
       scrollPosition: 0,
       scrollButtonShow: false,
+      showDetail: true,
+      galleryItemWidth: 290,
     };
   },
 
@@ -234,7 +236,6 @@ export default {
         len = -len;
         this.scrollPosition -= 1;
       }
-      console.log(len);
       //scroll to left is precise, but the reverse is not
       var gallery = document.getElementById("gallery");
       gallery.scrollTo({
@@ -247,6 +248,7 @@ export default {
       }
     },
     persetGallery() {
+      this.galleryItemWidth = document.querySelector("#galleryItem0").offsetWidth + 20;
       this.advantages = [...this.advantages, ...this.advantages, ...this.advantages]; //triplicate the advantages for smooth scrolling);
       this.presetDivBac();
     },
@@ -254,17 +256,18 @@ export default {
       nextTick(() => {
         setTimeout(() => {
           gallery.scrollTo({
-            left: 290 * 4,
+            left: this.galleryItemWidth * 4,
             behavior: "auto",
           });
-          console.log(document.getElementById("gallery").scrollLeft);
+          // console.log(document.getElementById("gallery").scrollLeft);
         }, 300);
       });
     },
     autoScrollGallery() {
       let gallery = document.querySelector(".gallery");
-      if (gallery.scrollLeft > 290 * 4) {
+      if (gallery.scrollLeft > this.galleryItemWidth * 4) {
         this.scrollButtonShow = true;
+        console.log(this.scrollButtonShow);
         return;
       } else {
         gallery.scrollBy({
@@ -299,12 +302,29 @@ export default {
         }
       });
     },
+    handleAdv() {
+      nextTick(() => {
+        let wid = window.innerWidth;
+        if (wid <= 500) {
+          this.showDetail = false;
+        } else {
+          this.showDetail = true;
+        }
+      });
+    },
+    presetAdv() {
+      this.handleAdv();
+      window.addEventListener("resize", () => {
+        this.handleAdv();
+      });
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
     window.requestAnimationFrame(this.autoScrollGallery);
     this.presetFunBac();
     this.persetGallery();
+    this.presetAdv();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -428,6 +448,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .gallery {
@@ -461,7 +482,6 @@ h2 {
   background-color: rgb(232, 209, 179);
   border: none;
   padding: 10px;
-  margin: 20px;
   cursor: pointer;
   border-radius: 3px;
 }
@@ -525,5 +545,55 @@ h2 {
 .bottomButton:hover {
   background-color: rgb(213, 173, 120);
   cursor: pointer;
+}
+
+@media screen and (width<=400px) {
+  .header ul {
+    min-width: unset;
+    display: none;
+  }
+  .sec0 {
+    height: auto;
+    display: unset;
+  }
+  .imgWrapper {
+    overflow: hidden;
+    border-radius: 0px;
+    min-width: unset;
+    height: auto;
+    width: 100%;
+    /* flex-shrink: 0; */
+  }
+  .sec0 img {
+    height: auto;
+    width: 100%;
+    max-height: none;
+    z-index: 1000;
+  }
+  .sec0 .routerLink {
+    margin-top: 20px;
+  }
+  .sec0div {
+    height: auto;
+  }
+  .sec1 {
+    height: auto;
+  }
+  .gallery {
+    min-width: unset;
+  }
+  .gallery div {
+    width: 130px;
+  }
+  .sec2 {
+    height: auto;
+    padding-bottom: 50px;
+  }
+  .sec2div {
+    height: 100vw;
+  }
+  .bottomButton {
+    font-size: 15px;
+  }
 }
 </style>
