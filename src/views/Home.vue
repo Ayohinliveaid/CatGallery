@@ -348,10 +348,14 @@ export default {
       ele.addEventListener("scroll", () => {
         let { scrollTop, offsetHeight, scrollHeight } = ele;
         if (scrollTop + offsetHeight > scrollHeight - 10) {
-          // this.requestMainCats();
-          console.log("haha");
-          if (!this.mainLoading) {
-            this.requestMainCats();
+          if (!this.isLoggedIn && this.mainCats.length >= 6) {
+            alert("Log in to enjoy more cats!");
+            this.activeName = "favourites";
+          } else {
+            // this.requestMainCats();
+            if (!this.mainLoading) {
+              this.requestMainCats();
+            }
           }
         }
       });
