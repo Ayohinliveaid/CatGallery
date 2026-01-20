@@ -7,7 +7,7 @@
     <div>
       <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
-          <el-tabs tab-position="left">
+          <el-tabs v-bind:tab-position="tabPos">
             <el-tab-pane label="Main Cats" v-loading="mainLoading">
               <div id="mainPane">
                 <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
@@ -217,6 +217,7 @@ export default {
       mainLoading: false,
       animatedLoading: false,
       lastScrollTop: 0, //track scrolltop to identify scroll direction, only scroll down matters
+      tabPos: "left",
     };
   },
   methods: {
@@ -363,25 +364,32 @@ export default {
         this.lastScrollTop = scrollTop;
       });
     },
+    handleTabPos() {
+      let wid = window.innerWidth;
+      if (wid <= 500) {
+        this.tabPos = "top";
+      } else {
+        this.tabPos = "left";
+      }
+    },
+    presetTabPos() {
+      this.handleTabPos();
+      window.addEventListener("resize", () => {
+        this.handleTabPos();
+      });
+    },
   },
   mounted() {
     // Automatically fetch the cat image when the page loads
     this.requestMainCats();
     this.requestAnimatedCats();
     this.mainPaneHandleScroll();
+    this.presetTabPos();
   },
 };
 </script>
 
 <style scoped>
-/* .catsPane{
-    background-color: aqua;
-    font-size: 40px;
-
-} */
-body {
-  /* overflow: hidden; */
-}
 .content {
   min-width: 0px;
 }

@@ -25,6 +25,7 @@ body {
   /* gap: 120px; */
   justify-content: space-between;
   /* max-height: 2000px; */
+  padding: 0 10px;
 }
 
 img {
@@ -66,9 +67,6 @@ img:hover {
   text-decoration: none;
   background-color: rgb(232, 209, 179);
   color: black;
-  /* positon:absolute; */
-  margin-right: 10px;
-  /* margin-left: auto; */
   padding: 10px;
   border-radius: 7px;
   box-shadow: 1px 1px 10px 0px grey;
@@ -80,3 +78,14 @@ img:hover {
   cursor: pointer;
   transition: all 0.5s ease 0s;
 }
+
+@media screen and (width<=400px) {
+  .el-tabs--top > .el-tabs__header .el-tabs__item:last-child {
+    padding-right: 20px !important;
+  }
+
+  .el-tabs--top > .el-tabs__header .el-tabs__item:nth-child(2) {
+    padding-left: 20px !important;
+  }
+}
+
