@@ -349,9 +349,8 @@ export default {
 .sec0 {
   height: 60vw;
   max-height: 500px;
-  min-height: 300px;
+  min-height: 350px;
   display: flex;
-  width: 90%;
 }
 .imgWrapper {
   overflow: hidden;
@@ -467,6 +466,7 @@ h2 {
 }
 
 .sec2 {
+  margin: 0 10px;
   margin-top: 70px;
   height: 800px;
   display: flex;
