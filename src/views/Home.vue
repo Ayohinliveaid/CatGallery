@@ -321,7 +321,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* .catsPane{
     background-color: aqua;
     font-size: 40px;

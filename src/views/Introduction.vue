@@ -311,7 +311,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header ul {
   display: flex;
   align-items: center;
@@ -426,7 +426,8 @@ h2 {
 
 .gallery {
   display: flex;
-  width: 870px;
+  min-width: 670px;
+  width: 80vw;
   overflow-x: hidden;
   /* scroll-behavior: smooth; */
 }
