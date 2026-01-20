@@ -475,9 +475,5 @@ export default {
   .window {
     height: 45vh;
   }
-  #outerTab {
-    height: 80vh;
-    overflow: hidden;
-  }
 }
 </style>
