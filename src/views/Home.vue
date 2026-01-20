@@ -8,29 +8,30 @@
       <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
           <el-tabs tab-position="left">
-            <el-tab-pane id="mainPane" label="Main Cats" v-loading="mainLoading">
-              <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
-                <el-card class="cardStyle">
-                  <img
-                    v-if="cat"
-                    v-bind:src="cat.url"
-                    alt="Cat Image"
-                    style="height: 400px"
-                  />
-                </el-card>
+            <el-tab-pane label="Main Cats" v-loading="mainLoading">
+              <div id="mainPane">
+                <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
+                  <el-card class="cardStyle">
+                    <img
+                      v-if="cat"
+                      v-bind:src="cat.url"
+                      alt="Cat Image"
+                      style="height: 400px"
+                    />
+                  </el-card>
 
-                <el-card style="flex: 1" class="cardStyle0">
-                  <el-button
-                    type="primary"
-                    class="buttonStyle"
-                    v-on:click="addToFavourites(cat)"
-                    >favourite</el-button
-                  >
-                  <br />
-                  CatID: {{ cat.id }}
-                </el-card>
-              </div>
-              <el-button
+                  <el-card style="flex: 1" class="cardStyle0">
+                    <el-button
+                      type="primary"
+                      class="buttonStyle"
+                      v-on:click="addToFavourites(cat)"
+                      >favourite</el-button
+                    >
+                    <br />
+                    CatID: {{ cat.id }}
+                  </el-card>
+                </div>
+                <!-- <el-button
                 type="primary"
                 style="margin: 0 10px"
                 class="buttonStyle"
@@ -38,7 +39,8 @@
                 v-if="!mainLoading"
               >
                 other cats</el-button
-              >
+              > -->
+              </div>
             </el-tab-pane>
             <el-tab-pane
               id="animatedPane"
@@ -208,21 +210,20 @@ export default {
   },
   methods: {
     requestMainCats: function () {
-      let ele = document.querySelector("#mainPane");
-      ele.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      this.mainCats.length = 0;
+      // let ele = document.querySelector("#mainPane");
+      // ele.scrollTo({
+      //   top: 0,
+      //   behavior: "smooth",
+      // });
       this.mainLoading = true;
-      let cardDiv = document.querySelectorAll(".cardDiv");
-      cardDiv.forEach((v, i) => {
-        v.style.width = "auto";
-      });
+      // let cardDiv = document.querySelectorAll(".cardDiv");
+      // cardDiv.forEach((v, i) => {
+      //   v.style.width = "auto";
+      // });
 
       nextTick(() => {
         axios
-          .get("https://api.thecatapi.com/v1/images/search?limit=3&mime_types=png", {
+          .get("https://api.thecatapi.com/v1/images/search?limit=2&mime_types=png", {
             headers: {
               "x-api-key":
                 "live_QTQoXsscFALX63br8NHnps2gMpgK0qiTiTNot1j6oVNcDDe2fdOzkZYfzcqDA8dK",
@@ -230,10 +231,11 @@ export default {
           })
           .then((response) => {
             // alert(JSON.stringify(response.data));  // Output the data received from the request
-            this.mainCats = response.data.map((cat) => ({
+            let newMainCats = response.data.map((cat) => ({
               id: cat.id,
               url: cat.url,
             }));
+            this.mainCats.push(...newMainCats);
           })
           .catch((error) => {
             console.error("Error fetching data:", error); // Handle any errors
@@ -338,11 +340,25 @@ export default {
         callback();
       }
     },
+    mainPaneHandleScroll() {
+      let ele = document.querySelector("#mainPane");
+      ele.addEventListener("scroll", () => {
+        let { scrollTop, offsetHeight, scrollHeight } = ele;
+        if (scrollTop + offsetHeight > scrollHeight - 10) {
+          // this.requestMainCats();
+          console.log("haha");
+          if (!this.mainLoading) {
+            this.requestMainCats();
+          }
+        }
+      });
+    },
   },
   mounted() {
     // Automatically fetch the cat image when the page loads
     this.requestMainCats();
     this.requestAnimatedCats();
+    this.mainPaneHandleScroll();
   },
 };
 </script>
@@ -380,7 +396,7 @@ body {
   height: 90vh;
 }
 
-#mainPane.el-tab-pane {
+#mainPane {
   overflow: auto;
   position: relative;
   height: calc(100vh - 120px);
