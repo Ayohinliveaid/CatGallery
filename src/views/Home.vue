@@ -342,7 +342,10 @@ export default {
       let ele = document.querySelector("#mainPane");
       ele.addEventListener("scroll", () => {
         let { scrollTop, offsetHeight, scrollHeight } = ele;
-        if (scrollTop > this.lastScrollTop && scrollTop + offsetHeight > scrollHeight) {
+        if (
+          scrollTop > this.lastScrollTop &&
+          scrollTop + offsetHeight > scrollHeight - 10
+        ) {
           //identify scroll down
           if (!this.isLoggedIn && this.mainCats.length >= 6) {
             // ele.scrollBy({
