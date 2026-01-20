@@ -77,6 +77,7 @@
                       v-on:click="addToFavourites(cat)"
                       >favourite</el-button
                     >
+                    <br />
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
@@ -225,10 +226,6 @@ export default {
       //   behavior: "smooth",
       // });
       this.mainLoading = true;
-      // let cardDiv = document.querySelectorAll(".cardDiv");
-      // cardDiv.forEach((v, i) => {
-      //   v.style.width = "auto";
-      // });
 
       nextTick(() => {
         axios
@@ -251,9 +248,6 @@ export default {
           })
           .finally(() => {
             this.mainLoading = false;
-            cardDiv.forEach((v, i) => {
-              v.style.width = "940px";
-            });
           });
       });
     },
