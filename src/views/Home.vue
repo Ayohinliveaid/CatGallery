@@ -8,7 +8,7 @@
       <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
           <el-tabs tab-position="left">
-            <el-tab-pane id="mainPane" label="Main Cats">
+            <el-tab-pane id="mainPane" label="Main Cats" v-loading="mainLoading">
               <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
                 <el-card class="cardStyle">
                   <img
@@ -32,14 +32,19 @@
               </div>
               <el-button
                 type="primary"
-                style="margin: 0 10px; width: 940px"
+                style="margin: 0 10px"
                 class="buttonStyle"
                 v-on:click="requestMainCats"
+                v-if="!mainLoading"
               >
                 other cats</el-button
               >
             </el-tab-pane>
-            <el-tab-pane id="animatedPane" label="Animated Cats">
+            <el-tab-pane
+              id="animatedPane"
+              label="Animated Cats"
+              v-loading="animatedLoading"
+            >
               <el-space direction="vertical" alignment="normal">
                 <div
                   v-for="(cat, index) in animatedCats"
@@ -65,11 +70,12 @@
                   </el-card>
                 </div>
                 <el-button
+                  v-if="!animatedLoading"
                   type="primary"
                   class="buttonStyle"
                   v-on:click="requestAnimatedCats"
                   style="margin-left: 10px"
-                  >more cats</el-button
+                  >other cats</el-button
                 >
               </el-space>
             </el-tab-pane>
@@ -196,6 +202,8 @@ export default {
         email: [{ validator: this.validateEmail, trigger: "blur" }],
         password: [{ validator: this.validatePassword, trigger: "blur" }],
       },
+      mainLoading: false,
+      animatedLoading: false,
     };
   },
   methods: {
@@ -205,6 +213,13 @@ export default {
         top: 0,
         behavior: "smooth",
       });
+      this.mainCats.length = 0;
+      this.mainLoading = true;
+      let cardDiv = document.querySelectorAll(".cardDiv");
+      cardDiv.forEach((v, i) => {
+        v.style.width = "auto";
+      });
+
       nextTick(() => {
         axios
           .get("https://api.thecatapi.com/v1/images/search?limit=3&mime_types=png", {
@@ -222,10 +237,18 @@ export default {
           })
           .catch((error) => {
             console.error("Error fetching data:", error); // Handle any errors
+          })
+          .finally(() => {
+            this.mainLoading = false;
+            cardDiv.forEach((v, i) => {
+              v.style.width = "940px";
+            });
           });
       });
     },
     requestAnimatedCats: function () {
+      this.animatedLoading = true;
+      this.animatedCats.length = 0;
       axios
         .get("https://api.thecatapi.com/v1/images/search?limit=1&mime_types=gif", {
           headers: {
@@ -242,6 +265,9 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching data:", error); // Handle any errors
+        })
+        .finally(() => {
+          this.animatedLoading = false;
         });
     },
     addToFavourites: function (cat) {
@@ -369,7 +395,7 @@ body {
   background-color: rgb(233, 208, 176);
   border: none;
   color: rgba(82, 56, 23, 0.691);
-  width: 100%;
+  /* width: 100%; */
   margin-bottom: 10px;
   transition: all 0.5s ease 0s;
 }
