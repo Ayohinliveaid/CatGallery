@@ -76,7 +76,7 @@
           </el-tabs>
         </el-tab-pane>
 
-        <el-tab-pane label="Favourites" name="favourites">
+        <el-tab-pane label="Favourites" name="favourites" id="favoutites">
           <span v-if="!isLoggedIn"> Login to save and access your favourites!</span>
 
           <div class="window" v-if="!isLoggedIn">
@@ -133,18 +133,18 @@
             </el-tabs>
           </div>
 
-          <h1 v-if="isLoggedIn == true && favouriteCats.length == 0">
+          <h1 v-else-if="isLoggedIn == true && favouriteCats.length == 0">
             Add your favourites from "Cats" panel!
           </h1>
 
-          <el-space direction="vertical" alignment="normal" v-if="isLoggedIn">
+          <div v-else-if="isLoggedIn">
             <div v-for="(cat, index) in favouriteCats" v-bind:key="index" class="cardDiv">
               <el-card class="cardStyle">
                 <img
                   v-if="cat"
                   v-bind:src="cat.url"
                   alt="Cat Image"
-                  style="height: 700px"
+                  style="height: 400px"
                 />
               </el-card>
               <el-card style="flex: 1" class="cardStyle0">
@@ -157,7 +157,7 @@
                 {{ cat.id }}
               </el-card>
             </div>
-          </el-space>
+          </div>
         </el-tab-pane>
 
         <el-tab-pane label="Me" name="me" v-if="isLoggedIn">
@@ -398,5 +398,10 @@ body {
   background-color: rgb(255, 245, 228);
   border: none;
   margin-left: 10px;
+}
+
+#favoutites {
+  overflow: auto;
+  height: calc(100vh - 120px);
 }
 </style>
