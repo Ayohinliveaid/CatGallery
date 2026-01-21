@@ -473,7 +473,7 @@ export default {
     height: unset;
   }
   .buffer {
-    height: 30vh;
+    height: 20vh;
   }
 }
 </style>
