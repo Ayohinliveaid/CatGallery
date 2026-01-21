@@ -8,7 +8,11 @@
       <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
           <el-tabs v-bind:tab-position="tabPos">
-            <el-tab-pane label="Main Cats" v-loading="mainLoading">
+            <el-tab-pane
+              label="Main Cats"
+              v-loading="mainLoading"
+              element-loading-background="rgba(200, 200, 200, 0.5)"
+            >
               <div id="mainPane">
                 <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
                   <el-card class="cardStyle">
@@ -35,23 +39,14 @@
                     CatID:
                   </el-card>
                 </div>
-                <!-- <el-button
-                type="primary"
-                style="margin: 0 10px"
-                class="buttonStyle"
-                v-on:click="requestMainCats"
-                v-if="!mainLoading"
-              >
-                other cats</el-button
-              > -->
               </div>
             </el-tab-pane>
             <el-tab-pane
-              id="animatedPane"
               label="Animated Cats"
               v-loading="animatedLoading"
+              element-loading-background="rgba(200, 200, 200, 0.5)"
             >
-              <el-space direction="vertical" alignment="normal">
+              <div id="animatedPane" ref="animatedPane">
                 <div
                   v-for="(cat, index) in animatedCats"
                   v-bind:key="index"
@@ -71,15 +66,17 @@
                     CatID: {{ cat.id }}
                   </el-card>
                 </div>
-                <el-button
-                  v-if="!animatedLoading"
-                  type="primary"
-                  class="buttonStyle"
-                  v-on:click="requestAnimatedCats"
-                  style="margin-left: 10px; margin-right: 10px"
-                  >other cats</el-button
-                >
-              </el-space>
+                <div class="buffer">
+                  <el-button
+                    v-if="!animatedLoading"
+                    type="primary"
+                    class="buttonStyle bottomButton"
+                    v-on:click="requestAnimatedCats"
+                  >
+                    other cats
+                  </el-button>
+                </div>
+              </div>
             </el-tab-pane>
           </el-tabs>
         </el-tab-pane>
@@ -363,6 +360,10 @@ export default {
         this.handleTabPos();
       });
     },
+    presetAnimatedPane() {
+      let wid = this.$refs.animatedPane.offsetTop;
+      console.log("wid ", wid);
+    },
   },
   mounted() {
     // Automatically fetch the cat image when the page loads
@@ -370,6 +371,7 @@ export default {
     this.requestAnimatedCats();
     this.mainPaneHandleScroll();
     this.presetTabPos();
+    // this.presetAnimatedPane();
   },
 };
 </script>
@@ -399,25 +401,30 @@ export default {
 
 #outerTab {
   height: 90vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #mainPane {
   overflow: auto;
   position: relative;
   height: calc(100vh - 120px);
+  padding: 0 10px;
 }
 .buffer {
   height: 60px;
 }
 
-#animatedPane.el-tab-pane {
+#animatedPane {
   overflow: auto;
   position: relative;
   height: calc(100vh - 120px);
+  display: block;
+  width: 100%;
+  padding: 0 10px;
+  --contentWidth: 940px;
 }
 
-.el-button.buttonStyle {
+.buttonStyle {
   background-color: rgb(233, 208, 176);
   border: none;
   color: rgba(82, 56, 23, 0.691);
@@ -426,18 +433,25 @@ export default {
   transition: all 0.5s ease 0s;
 }
 
-.el-button.buttonStyle:hover {
+.buttonStyle:hover {
   background-color: rgba(204, 158, 98, 0.691);
   /* Active background color */
   color: rgba(0, 0, 0, 0.691);
 }
 
+.bottomButton {
+  width: var(--contentWidth);
+  /* width: 100%; */
+  height: 50px;
+  box-sizing: border-box !important;
+}
+
 .cardDiv {
   display: flex;
-  width: 940px;
-  overflow: auto;
+  width: var(--contentWidth);
+  /* overflow: auto; */
   margin-bottom: 10px;
-  margin-right: 10px;
+  gap: 10px;
 }
 .cardDiv img {
   height: 400px;
@@ -446,14 +460,12 @@ export default {
 .el-card.cardStyle {
   background-color: white;
   border: none;
-  margin-left: 10px;
   /* box-shadow: 3px 3px 100px 100px rgb(173, 247, 173); */
 }
 
 .el-card.cardStyle0 {
   background-color: rgb(255, 245, 228);
   border: none;
-  margin-left: 10px;
 }
 
 #favoutites {
@@ -464,6 +476,9 @@ export default {
 @media screen and (width<=400px) {
   .window {
     height: 45vh;
+  }
+  #animatedPane {
+    --contentWidth: 550px;
   }
   .cardDiv {
     width: 550px;
