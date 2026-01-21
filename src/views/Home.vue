@@ -476,6 +476,7 @@ export default {
 @media screen and (width<=400px) {
   .window {
     height: 45vh;
+    min-height: 380px;
   }
   #animatedPane {
     --contentWidth: 550px;
