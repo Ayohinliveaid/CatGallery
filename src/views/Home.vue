@@ -76,7 +76,7 @@
                   type="primary"
                   class="buttonStyle"
                   v-on:click="requestAnimatedCats"
-                  style="margin-left: 10px"
+                  style="margin-left: 10px; margin-right: 10px"
                   >other cats</el-button
                 >
               </el-space>
@@ -237,7 +237,7 @@ export default {
       this.animatedLoading = true;
       this.animatedCats.length = 0;
       axios
-        .get("https://api.thecatapi.com/v1/images/search?limit=1&mime_types=gif", {
+        .get("https://api.thecatapi.com/v1/images/search?limit=2&mime_types=gif", {
           headers: {
             "x-api-key":
               "live_QTQoXsscFALX63br8NHnps2gMpgK0qiTiTNot1j6oVNcDDe2fdOzkZYfzcqDA8dK",
