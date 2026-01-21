@@ -12,12 +12,7 @@
               <div id="mainPane">
                 <div v-for="(cat, index) in mainCats" v-bind:key="index" class="cardDiv">
                   <el-card class="cardStyle">
-                    <img
-                      v-if="cat"
-                      v-bind:src="cat.url"
-                      alt="Cat Image"
-                      style="height: 400px"
-                    />
+                    <img v-if="cat" v-bind:src="cat.url" alt="Cat Image" />
                   </el-card>
 
                   <el-card style="flex: 1" class="cardStyle0">
@@ -63,12 +58,7 @@
                   class="cardDiv"
                 >
                   <el-card class="cardStyle">
-                    <img
-                      v-if="cat"
-                      v-bind:src="cat.url"
-                      alt="Cat Image"
-                      style="height: 400px"
-                    />
+                    <img v-if="cat" v-bind:src="cat.url" alt="Cat Image" />
                   </el-card>
                   <el-card style="flex: 1" class="cardStyle0">
                     <el-button
@@ -158,12 +148,7 @@
           <div v-else-if="isLoggedIn">
             <div v-for="(cat, index) in favouriteCats" v-bind:key="index" class="cardDiv">
               <el-card class="cardStyle">
-                <img
-                  v-if="cat"
-                  v-bind:src="cat.url"
-                  alt="Cat Image"
-                  style="height: 400px"
-                />
+                <img v-if="cat" v-bind:src="cat.url" alt="Cat Image" />
               </el-card>
               <el-card style="flex: 1" class="cardStyle0">
                 <el-button
@@ -451,6 +436,10 @@ export default {
   width: 940px;
   overflow: auto;
   margin-bottom: 10px;
+  margin-right: 10px;
+}
+.cardDiv img {
+  height: 400px;
 }
 
 .el-card.cardStyle {
@@ -474,6 +463,17 @@ export default {
 @media screen and (width<=400px) {
   .window {
     height: 45vh;
+  }
+  .cardDiv {
+    width: 550px;
+  }
+
+  .cardDiv img {
+    width: 80vw;
+    height: unset;
+  }
+  .buffer {
+    height: 30vh;
   }
 }
 </style>
