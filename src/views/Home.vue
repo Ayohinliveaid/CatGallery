@@ -206,12 +206,12 @@ export default {
     };
   },
   methods: {
-    requestMainCats: function () {
+    requestMainCats: function (n = 2) {
       this.mainLoading = true;
 
       nextTick(() => {
         axios
-          .get("https://api.thecatapi.com/v1/images/search?limit=2&mime_types=png", {
+          .get(`https://api.thecatapi.com/v1/images/search?limit=${n}&mime_types=png`, {
             headers: {
               "x-api-key":
                 "live_QTQoXsscFALX63br8NHnps2gMpgK0qiTiTNot1j6oVNcDDe2fdOzkZYfzcqDA8dK",
@@ -366,7 +366,7 @@ export default {
   },
   mounted() {
     // Automatically fetch the cat image when the page loads
-    this.requestMainCats();
+    this.requestMainCats(3);
     this.requestAnimatedCats();
     this.mainPaneHandleScroll();
     this.presetTabPos();
@@ -469,7 +469,7 @@ export default {
   }
 
   .cardDiv img {
-    width: 80vw;
+    width: 75vw;
     height: unset;
   }
   .buffer {
