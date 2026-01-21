@@ -388,6 +388,7 @@ export default {
   background-color: antiquewhite;
   height: 50vh;
   width: 80vw;
+  max-width: 400px;
   position: fixed;
   /* positon:absolute;why absolute make the div non-visible? not compatible with element plus*/
   top: 50%;
