@@ -406,6 +406,7 @@ export default {
 #outerTab {
   height: 90vh;
   /* overflow: hidden; */
+  --contentWidth: 940px;
 }
 
 #mainPane {
@@ -425,7 +426,6 @@ export default {
   display: block;
   width: 100%;
   padding: 0 10px;
-  --contentWidth: 940px;
 }
 
 .buttonStyle {
