@@ -397,6 +397,10 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 1px 1px 10px 0px grey;
+  transition: all 1s ease 0s;
+}
+.window:hover {
+  transform: translate(-50%, -50%) scale(1.02);
 }
 
 #outerTab {
