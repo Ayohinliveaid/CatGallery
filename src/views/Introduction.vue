@@ -83,6 +83,7 @@
       </div>
     </div>
   </div>
+  <!-- <div ref="mouseTracker" class="mouseTracker" v-show="mouseTrackerShow"></div> -->
 </template>
 
 <script>
@@ -168,6 +169,7 @@ export default {
       scrollButtonShow: false,
       showDetail: true,
       galleryItemWidth: 290,
+      mouseTrackerShow: false,
     };
   },
 
@@ -318,6 +320,18 @@ export default {
         this.handleAdv();
       });
     },
+    presetMouseTracker() {
+      window.addEventListener("mouseover", () => {
+        this.mouseTrackerShow = true;
+      });
+      window.addEventListener("mousemove", (e) => {
+        this.$refs.mouseTracker.style.left = e.clientX + "px";
+        this.$refs.mouseTracker.style.top = e.clientY + "px";
+      });
+      window.addEventListener("mouseout", () => {
+        this.mouseTrackerShow = false;
+      });
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -325,6 +339,7 @@ export default {
     this.presetFunBac();
     this.persetGallery();
     this.presetAdv();
+    this.presetMouseTracker();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);

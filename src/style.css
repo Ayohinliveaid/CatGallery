@@ -79,6 +79,14 @@ img:hover {
   transition: all 0.5s ease 0s;
 }
 
+.mouseTracker {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  background: blue;
+  z-index: 10000;
+}
+
 @media screen and (width<=400px) {
   .el-tabs--top > .el-tabs__header .el-tabs__item:last-child {
     padding-right: 20px !important;
