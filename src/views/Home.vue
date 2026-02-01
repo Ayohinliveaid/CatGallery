@@ -357,7 +357,7 @@ export default {
         note.style.alignItems = "center";
         note.style.borderRadius = "7px";
         note.style.opacity = "0.8";
-        note.innerText = "Save successful";
+        note.innerText = "Save successfully!";
         var body = document.querySelector("body");
         body.appendChild(note);
         setTimeout(function () {
