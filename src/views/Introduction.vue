@@ -301,7 +301,7 @@ export default {
       let gallery = document.querySelector(".gallery");
       if (gallery.scrollLeft > this.galleryItemWidth * 4) {
         this.scrollButtonShow = true;
-        console.log(this.scrollButtonShow);
+        // console.log(this.scrollButtonShow);
         return;
       } else {
         gallery.scrollBy({
