@@ -10,9 +10,17 @@
     <div>
       <el-tabs stretch v-model="activeName" id="outerTab">
         <el-tab-pane label="Cats" name="cats" class="catsPane">
+          <template #label>
+            <span style="display: inline-flex; align-items: center; gap: 6px">
+              Cats
+              <el-icon>
+                <Grid />
+              </el-icon>
+            </span>
+          </template>
           <el-tabs v-bind:tab-position="tabPos">
             <el-tab-pane
-              label="Main Cats"
+              label="Static Cats"
               v-loading="mainLoading"
               element-loading-background="rgba(200, 200, 200, 0.5)"
             >
@@ -84,25 +92,55 @@
           </el-tabs>
         </el-tab-pane>
 
-        <el-tab-pane label="Favourites" name="favourites" id="favoutites">
-          <span v-if="!isLoggedIn"> Login to save and access your favourites!</span>
+        <el-tab-pane name="favourites" id="favoutites">
+          <template #label>
+            <span style="display: inline-flex; align-items: center; gap: 6px">
+              Favourites
+              <el-icon>
+                <Collection />
+              </el-icon>
+            </span>
+          </template>
+          <div style="margin-left: var(--pane-content-margin)">
+            <span v-if="!isLoggedIn"> Login to save and access your favourites!</span>
+          </div>
 
           <div class="window" v-if="!isLoggedIn">
             <el-tabs stretch>
               <el-tab-pane label="Login">
                 <el-form
                   label-width="100px"
-                  style="width: 90%x; margin-top: 25px; margin-right: 68px"
+                  style="padding: 15px 30px"
                   v-bind:model="loginForm"
                   v-bind:rules="loginRules"
                   ref="loginForm"
                 >
-                  <el-form-item label="E-mail" prop="email">
+                  <el-form-item prop="email">
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Message />
+                        </el-icon>
+                        E-mail
+                      </span>
+                    </template>
+
                     <el-input v-model="loginForm.email" clearable></el-input>
                   </el-form-item>
-                  <el-form-item label="Password" prop="password">
+
+                  <el-form-item prop="password">
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Unlock />
+                        </el-icon>
+                        Password
+                      </span>
+                    </template>
+
                     <el-input
                       v-model="loginForm.password"
+                      clearable
                       type="password"
                       show-password
                     ></el-input>
@@ -113,23 +151,54 @@
                     >
                   </el-form-item>
                 </el-form>
-                <p style="margin-top: 70px">(Test login function with any input)</p>
+                <p style="margin: 50px var(--pane-content-margin)">
+                  (Test login function with any input)
+                </p>
               </el-tab-pane>
               <el-tab-pane label="Sign Up">
-                <el-form
-                  label-width="100px"
-                  style="width: 90%; margin-top: 25px; margin-right: 900px"
-                >
-                  <el-form-item label="E-mail">
+                <el-form label-width="100px" style="padding: 15px 30px">
+                  <el-form-item>
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Message />
+                        </el-icon>
+                        E-mail
+                      </span>
+                    </template>
                     <el-input></el-input>
                   </el-form-item>
                   <el-form-item label="Password">
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Unlock />
+                        </el-icon>
+                        Password
+                      </span>
+                    </template>
                     <el-input></el-input>
                   </el-form-item>
                   <el-form-item label="Password">
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Unlock />
+                        </el-icon>
+                        Password
+                      </span>
+                    </template>
                     <el-input></el-input>
                   </el-form-item>
                   <el-form-item label="Veri-code">
+                    <template #label>
+                      <span style="display: inline-flex; align-items: center; gap: 6px">
+                        <el-icon :size="15">
+                          <Key />
+                        </el-icon>
+                        Vri-code
+                      </span>
+                    </template>
                     <el-input></el-input>
                   </el-form-item>
 
@@ -140,10 +209,12 @@
               </el-tab-pane>
             </el-tabs>
           </div>
-
-          <h1 v-else-if="isLoggedIn == true && favouriteCats.length == 0">
-            Add your favourites from "Cats" panel!
-          </h1>
+          <div
+            v-else-if="isLoggedIn == true && favouriteCats.length == 0"
+            style="margin-left: var(--pane-content-margin)"
+          >
+            <h1>Add your favourites from "Cats" panel!</h1>
+          </div>
 
           <div v-else-if="isLoggedIn">
             <div v-for="(cat, index) in favouriteCats" v-bind:key="index" class="cardDiv">
@@ -163,15 +234,25 @@
           </div>
         </el-tab-pane>
 
-        <el-tab-pane label="Me" name="me" v-if="isLoggedIn">
-          <h1>Wellcome {{ loginForm.email }}!</h1>
-          <el-button
-            type="primary"
-            v-if="isLoggedIn"
-            v-on:click="logout"
-            class="buttonStyle"
-            >logout</el-button
-          >
+        <el-tab-pane name="me" v-if="isLoggedIn">
+          <template #label>
+            <span style="display: inline-flex; align-items: center; gap: 6px">
+              Account
+              <el-icon>
+                <User />
+              </el-icon>
+            </span>
+          </template>
+          <div style="margin-left: var(--pane-content-margin)">
+            <h1>Wellcome {{ loginForm.email }}!</h1>
+            <el-button
+              type="primary"
+              v-if="isLoggedIn"
+              v-on:click="logout"
+              class="buttonStyle"
+              >logout</el-button
+            >
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>

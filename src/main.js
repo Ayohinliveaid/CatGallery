@@ -11,6 +11,11 @@ import {
   ArrowLeft,
   ArrowRight,
   Grid,
+  Message,
+  Unlock,
+  Key,
+  Collection,
+  User,
 } from "@element-plus/icons-vue";
 
 var app = createApp(App);
@@ -22,5 +27,12 @@ app.component("Medal", Medal);
 app.component("ArrowLeft", ArrowLeft);
 app.component("ArrowRight", ArrowRight);
 app.component("Grid", Grid);
+app.component("Message", Message);
+app.component("Unlock", Unlock);
+app.component("Key", Key);
+app.component("Collection", Collection);
+app.component("User", User);
+app.component("Collection", Collection);
+app.component("Collection", Collection);
 
 app.mount("#app");

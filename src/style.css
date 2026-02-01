@@ -4,7 +4,16 @@ body {
   margin: 0;
   --icon-size-header: 20px;
   --icon-size-content: 35px;
+  --pane-content-margin: 30px;
 }
+
+.el-icon svg {
+  height: var(--icon-size-header) !important;
+  width: var(--icon-size-header) !important;
+}
+/* .el-icon {
+  font-size: var(--icon-size-header);
+} */
 
 .content {
   position: relative;
