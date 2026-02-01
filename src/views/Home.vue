@@ -466,7 +466,6 @@ export default {
 }
 
 .header {
-  height: 10vh;
   position: relative;
 }
 

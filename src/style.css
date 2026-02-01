@@ -39,6 +39,13 @@ body {
   justify-content: space-between;
   /* max-height: 2000px; */
   padding: 0 10px;
+  height: 10vh;
+}
+
+h2 {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 img {

@@ -455,13 +455,6 @@ p {
   padding-top: 0;
 }
 
-h2 {
-  height: var(--icon-size-content);
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
 .sec0 .routerLink {
   width: 260px;
   margin-left: 20px;
