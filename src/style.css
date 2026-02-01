@@ -2,6 +2,8 @@ body {
   height: 100vh;
   overflow: auto;
   margin: 0;
+  --icon-size-header: 20px;
+  --icon-size-content: 35px;
 }
 
 .content {
@@ -19,7 +21,9 @@ body {
   box-sizing: border-box;
   position: sticky;
   top: 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* webkit兼容safari */
   box-shadow: 0 1px 5px 0px grey;
   z-index: 1000;
   /* gap: 120px; */

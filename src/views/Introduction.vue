@@ -2,11 +2,27 @@
   <div class="content">
     <header class="header">
       <!-- <img src=""  alt="LOGO"/> -->
-      <h2 style="white-space: nowrap">Cat Gallery</h2>
+      <h2 style="white-space: nowrap">
+        Cat Gallery
+        <Grid style="width: var(--icon-size-header); height: var(--icon-size-header)" />
+      </h2>
       <ul>
-        <li id="li0"><a @click="scrollToSec('#sec0')">Introduction</a></li>
-        <li id="li1"><a @click="scrollToSec('#sec1')">Advantages</a></li>
-        <li id="li2"><a @click="scrollToSec('#sec2')">Functions</a></li>
+        <li id="li0">
+          <a @click="scrollToSec('#sec0')"> Introduction </a>
+          <!-- <Compass
+            style="width: var(--icon-size-header); height: var(--icon-size-header)"
+          /> -->
+        </li>
+        <li id="li1">
+          <a @click="scrollToSec('#sec1')">Advantages </a>
+          <!-- <Medal
+            style="width: var(--icon-size-header); height: var(--icon-size-header)"
+          /> -->
+        </li>
+        <li id="li2">
+          <a @click="scrollToSec('#sec2')">Functions </a>
+          <!-- <Star style="width: var(--icon-size-header); height: var(--icon-size-header)" /> -->
+        </li>
       </ul>
       <div @click="toHome" class="routerLink">Experience now</div>
     </header>
@@ -32,7 +48,12 @@
     <div id="sec1" class="sec1">
       <!-- sec1: continuing updating! -->
 
-      <h2>Advantages</h2>
+      <h2>
+        Advantages
+        <Medal
+          style="width: var(--icon-size-content); height: var(--icon-size-content)"
+        />
+      </h2>
       <!-- 
         <div class="gallery-container">
             <button id="scroll-left" v-on:click="this.scrollLeft">← 左移</button>
@@ -48,7 +69,10 @@
           id="scroll-left"
           v-on:click="this.scrollVertically('l')"
         >
-          ← Left
+          <ArrowLeft
+            style="width: var(--icon-size-header); height: var(--icon-size-header)"
+          />
+          Left
         </button>
         <div class="gallery" id="gallery">
           <div
@@ -66,13 +90,21 @@
           id="scroll-right"
           v-on:click="this.scrollVertically('r')"
         >
-          Right →
+          <ArrowRight
+            style="width: var(--icon-size-header); height: var(--icon-size-header)"
+          />
+          Right
         </button>
       </div>
     </div>
     <div id="sec2" class="sec2">
       <div>
-        <h2>Functions</h2>
+        <h2>
+          Functions
+          <Star
+            style="width: var(--icon-size-content); height: var(--icon-size-content)"
+          />
+        </h2>
       </div>
       <div class="sec2div">
         <div v-for="func in functions" v-bind:id="func.id" v-bind:key="func.title">
@@ -327,6 +359,7 @@ export default {
       window.addEventListener("mousemove", (e) => {
         this.$refs.mouseTracker.style.left = e.clientX + "px";
         this.$refs.mouseTracker.style.top = e.clientY + "px";
+        this.$refs.mouseTracker.style.transform = "translate(-50%,-50%)";
       });
       window.addEventListener("mouseout", () => {
         this.mouseTrackerShow = false;
@@ -363,6 +396,7 @@ export default {
   height: 50px;
   border-radius: 7px;
   display: flex;
+  gap: 5px;
   align-items: center;
   box-shadow: 1px 1px 5px 0px grey;
   padding: 0 10px;
@@ -422,7 +456,10 @@ p {
 }
 
 h2 {
-  padding-left: 10px;
+  height: var(--icon-size-content);
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .sec0 .routerLink {
