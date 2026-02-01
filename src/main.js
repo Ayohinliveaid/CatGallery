@@ -32,7 +32,5 @@ app.component("Unlock", Unlock);
 app.component("Key", Key);
 app.component("Collection", Collection);
 app.component("User", User);
-app.component("Collection", Collection);
-app.component("Collection", Collection);
 
 app.mount("#app");

@@ -372,7 +372,7 @@ export default {
     this.presetFunBac();
     this.persetGallery();
     this.presetAdv();
-    this.presetMouseTracker();
+    // this.presetMouseTracker();
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
