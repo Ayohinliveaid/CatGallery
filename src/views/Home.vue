@@ -132,7 +132,7 @@
                     <template #label>
                       <span style="display: inline-flex; align-items: center; gap: 6px">
                         <el-icon :size="15">
-                          <Unlock />
+                          <Lock />
                         </el-icon>
                         Password
                       </span>
@@ -172,7 +172,7 @@
                     <template #label>
                       <span style="display: inline-flex; align-items: center; gap: 6px">
                         <el-icon :size="15">
-                          <Unlock />
+                          <Lock />
                         </el-icon>
                         Password
                       </span>
@@ -183,7 +183,7 @@
                     <template #label>
                       <span style="display: inline-flex; align-items: center; gap: 6px">
                         <el-icon :size="15">
-                          <Unlock />
+                          <Lock />
                         </el-icon>
                         Password
                       </span>

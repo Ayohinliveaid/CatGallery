@@ -12,7 +12,7 @@ import {
   ArrowRight,
   Grid,
   Message,
-  Unlock,
+  Lock,
   Key,
   Collection,
   User,
@@ -28,7 +28,7 @@ app.component("ArrowLeft", ArrowLeft);
 app.component("ArrowRight", ArrowRight);
 app.component("Grid", Grid);
 app.component("Message", Message);
-app.component("Unlock", Unlock);
+app.component("Lock", Lock);
 app.component("Key", Key);
 app.component("Collection", Collection);
 app.component("User", User);
