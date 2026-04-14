@@ -2,10 +2,13 @@
   <div class="content">
     <header class="header">
       <!-- <img src=""  alt="LOGO"/> -->
-      <h2 style="white-space: nowrap">
-        Cat Gallery
-        <Grid style="width: var(--icon-size-header); height: var(--icon-size-header)" />
-      </h2>
+      <router-link to="/" class="routerLink1">
+        <h2>
+          Cat Gallery
+          <Grid style="width: var(--icon-size-header); height: var(--icon-size-header)" />
+        </h2>
+      </router-link>
+
       <ul>
         <li id="li0">
           <a @click="scrollToSec('#sec0')"> Introduction </a>
@@ -299,6 +302,7 @@ export default {
     },
     autoScrollGallery() {
       let gallery = document.querySelector(".gallery");
+      if (!gallery) return;
       if (gallery.scrollLeft > this.galleryItemWidth * 4) {
         this.scrollButtonShow = true;
         // console.log(this.scrollButtonShow);
@@ -610,7 +614,6 @@ p {
     min-width: unset;
     height: auto;
     width: 100%;
-    /* flex-shrink: 0; */
   }
   .sec0 img {
     height: auto;

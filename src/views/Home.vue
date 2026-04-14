@@ -1,10 +1,12 @@
 <template>
   <div class="content">
     <header class="header">
-      <h2 style="white-space: nowrap">
-        Cat Gallery
-        <Grid style="width: var(--icon-size-header); height: var(--icon-size-header)" />
-      </h2>
+      <router-link to="/" class="routerLink1">
+        <h2>
+          Cat Gallery
+          <Grid style="width: var(--icon-size-header); height: var(--icon-size-header)" />
+        </h2>
+      </router-link>
       <router-link to="/" class="routerLink">introduction</router-link>
     </header>
     <div>

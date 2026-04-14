@@ -46,6 +46,11 @@ h2 {
   display: flex;
   gap: 5px;
   align-items: center;
+  white-space: nowrap;
+}
+
+.header h2 {
+  cursor: pointer;
 }
 
 img {
@@ -97,6 +102,11 @@ img:hover {
   text-overflow: ellipsis;
   cursor: pointer;
   transition: all 0.5s ease 0s;
+}
+
+.routerLink1 {
+  text-decoration: none;
+  color: black;
 }
 
 .mouseTracker {
