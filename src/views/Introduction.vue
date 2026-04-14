@@ -370,6 +370,7 @@ export default {
       });
     },
   },
+
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
     window.requestAnimationFrame(this.autoScrollGallery);
@@ -607,6 +608,10 @@ p {
   .sec0 {
     height: auto;
     display: unset;
+  }
+  .sec0div ul,
+  .sec0div p {
+    font-size: 1.5rem;
   }
   .imgWrapper {
     overflow: hidden;

@@ -18,6 +18,15 @@ import {
   User,
 } from "@element-plus/icons-vue";
 
+setHTMLFontSize;
+function setHTMLFontSize() {
+  let html = document.documentElement;
+  let screenWidth = html.clientWidth;
+  html.style.fontSize = `clamp(14px, ${(screenWidth / 800) * 20}, 16px);`;
+}
+setHTMLFontSize();
+window.addEventListener("resize", setHTMLFontSize);
+
 var app = createApp(App);
 app.use(ElementPlus); //use for plugin
 app.use(router);
