@@ -609,10 +609,6 @@ p {
     height: auto;
     display: unset;
   }
-  .sec0div ul,
-  .sec0div p {
-    font-size: 1.5rem;
-  }
   .imgWrapper {
     overflow: hidden;
     border-radius: 0px;
