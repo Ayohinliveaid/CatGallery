@@ -466,10 +466,6 @@ p {
   margin-top: auto;
 }
 
-.routerLink:hover {
-  background-color: rgb(213, 173, 120);
-}
-
 .sec1 {
   height: 400px;
   margin-top: 70px;
